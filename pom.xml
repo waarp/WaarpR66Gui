@@ -3,7 +3,7 @@
   <groupId>GoldenGate</groupId>
   <artifactId>GoldenGateR66Gui</artifactId>
   <name>GoldenGate OpenR66 Client GUI</name>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>GUI to enable to check connection or to make synchronous transfers with a remote
   OpenR66 Server with a client with no Database support</description>
   <url>http://openr66.free.fr/GoldenGateR66</url>
@@ -100,7 +100,7 @@
     <dependency>
       <groupId>GoldenGate</groupId>
       <artifactId>GoldenGateR66</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
     </dependency>
     <dependency>
     	<groupId>org.jdesktop</groupId>
@@ -209,6 +209,10 @@
                       <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
                         <exclude name="**/.*/**" />
                         <include name="**" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/src/main/java/openr66/clientgui" prefix="openr66/clientgui/">
+                        <exclude name="**/.*/**" />
+                        <exclude name="**/*.java/**" />
                       </zipfileset>
                       <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}.orig.jar" dirmode="755">
                       </zipfileset>

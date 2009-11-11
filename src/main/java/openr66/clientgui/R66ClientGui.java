@@ -97,10 +97,10 @@ public class R66ClientGui {
         if (result.isSuccess()) {
             R66Result r66result = result.getResult();
             ValidPacket info = (ValidPacket) r66result.other;
-            GuiResultat = "<html>Test Message\n    SUCCESS\n    " +
+            GuiResultat = "<html>Test Message    SUCCESS<br>    " +
                     info.getSheader();
         } else {
-            GuiResultat = "<html>Test Message\n    FAILURE\n    " +
+            GuiResultat = "<html>Test Message    FAILURE<br>    " +
                     result.getResult().toString();
         }
     }
@@ -110,6 +110,7 @@ public class R66ClientGui {
         R66Future future = new R66Future(true);
         DirectTransfer transaction = new DirectTransfer(future, GuiHostId,
                 GuiFile, GuiRule, GuiInfo, GuiMd5, 65536, networkTransaction);
+        logger.debug("Launch transfer: "+GuiHostId+":"+GuiRule+":"+GuiFile);
         transaction.run();
         future.awaitUninterruptibly();
         long time2 = System.currentTimeMillis();
@@ -117,40 +118,38 @@ public class R66ClientGui {
         R66Result result = future.getResult();
         if (future.isSuccess()) {
             if (result.runner.getErrorInfo() == ErrorCode.Warning) {
-                GuiResultat = "<html>WARNED\n    " +
-                        result.runner.toShortString() +
-                        "\n    <REMOTE>" +
+                GuiResultat = "<html>WARNED<br>    " +
+                        result.runner.toShortNoHtmlString("<br>") +
+                        "<br>    REMOTE: " +
                         GuiHostId +
-                        "</REMOTE>" +
-                        "\n    <FILEFINAL>" +
                         (result.file != null? result.file.toString() +
-                                "</FILEFINAL>" : "no file") + "\n    delay: " +
+                                "" : "no file") + "    delay: " +
                         delay;
             } else {
-                GuiResultat = "<html>SUCCESS\n    " +
-                        result.runner.toShortString() +
-                        "\n    <REMOTE>" +
-                        GuiHostId +
-                        "</REMOTE>" +
-                        "\n    <FILEFINAL>" +
-                        (result.file != null? result.file.toString() +
-                                "</FILEFINAL>" : "no file") + "\n    delay: " +
-                        delay;
+                GuiResultat = "<html>SUCCESS<br>    " +
+                    result.runner.toShortNoHtmlString("<br>") +
+                    "<br>    REMOTE: " +
+                    GuiHostId +
+                    (result.file != null? result.file.toString() +
+                            "" : "no file") + "    delay: " +
+                    delay;
             }
         } else {
             if (result == null || result.runner == null) {
-                GuiResultat = "<html>Transfer in\n    FAILURE with no Id\n    "+
-                    "\n    <REMOTE>" +
-                    GuiHostId + "</REMOTE>\n    "+ future
+                GuiResultat = "<html>Transfer in FAILURE with no Id"+
+                    "<br>    REMOTE: " +
+                    GuiHostId + "     "+ future
                         .getCause().getMessage();
             } else if (result.runner.getErrorInfo() == ErrorCode.Warning) {
-                GuiResultat = "<html>Transfer is\n    WARNED\n    " +
-                        result.runner.toShortString() + "\n    <REMOTE>" +
-                        GuiHostId + "</REMOTE>\n    "+ future.getCause().getMessage();
+                GuiResultat = "<html>Transfer is WARNED<br>    " +
+                    result.runner.toShortNoHtmlString("<br>") +
+                    "<br>    REMOTE: " +
+                    GuiHostId +"    "+ future.getCause().getMessage();
             } else {
-                GuiResultat = "<html>Transfer in\n    FAILURE\n    " +
-                        result.runner.toShortString() + "\n    <REMOTE>" +
-                        GuiHostId + "</REMOTE>\n    "+ future.getCause().getMessage();
+                GuiResultat = "<html>Transfer in FAILURE<br>    " +
+                    result.runner.toShortNoHtmlString("<br>")+
+                    "<br>    REMOTE: " +
+                    GuiHostId +"    "+ future.getCause().getMessage();
             }
         }
     }

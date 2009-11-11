@@ -5,6 +5,9 @@
 		<author email="fredbregier at free.fr">Frederic Bregier</author>
 	</properties>
 	<body>
+		<release version="1.0.1" date="2009-11-12" description="Stable Release">
+			<action dev="Frederic Bregier" type="dix">Fix output in transfer</action>
+		</release>
 		<release version="1.0.0" date="2009-11-11" description="First release">
 			<action dev="Frederic Bregier" type="add">First public version</action>
 		</release>
