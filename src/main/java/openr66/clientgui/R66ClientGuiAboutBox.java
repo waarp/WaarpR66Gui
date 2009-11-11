@@ -6,6 +6,11 @@ package openr66.clientgui;
 
 import org.jdesktop.application.Action;
 
+/**
+ * About JDialog class
+ * @author Frederic Bregier
+ *
+ */
 public class R66ClientGuiAboutBox extends javax.swing.JDialog {
 
     /**

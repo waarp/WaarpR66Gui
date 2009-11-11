@@ -6,6 +6,11 @@ package openr66.clientgui;
 
 import org.jdesktop.application.Action;
 
+/**
+ * CheckConnection or Transfer Result Box class
+ * @author Frederic Bregier
+ *
+ */
 public class R66ClientGuiCheckConnectionBox extends javax.swing.JDialog {
 
     /**

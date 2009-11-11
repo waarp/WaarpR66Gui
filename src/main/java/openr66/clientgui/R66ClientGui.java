@@ -31,7 +31,7 @@ import openr66.protocol.utils.ChannelUtils;
 import openr66.protocol.utils.R66Future;
 
 /**
- *
+ * Main class to launch the OpenR66 Client Graphical User Interface
  * @author frederic
  */
 public class R66ClientGui {
