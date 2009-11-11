@@ -1,8 +1,10 @@
 GoldenGate OpenR66 Client Gui
 
-  The GoldenGate OpenR66 Client Gui project is a simple Graphical Utilisator Interface for
+  The GoldenGate OpenR66 Client Gui project is a simple Graphical User Interface for
   OpenR66 Client that allows to check connection with a remote host or to initiate a
   synchronous transfer.
+
+[images/OpenR66ClientGui.png] GoldenGate Main Project Logo
 
 Dependency
 

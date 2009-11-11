@@ -44,7 +44,7 @@ public class R66ClientGuiAboutBox extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(openr66.clientgui.R66ClientGuiApp.class).getContext().getResourceMap(R66ClientGuiAboutBox.class);
-        setTitle(resourceMap.getString("title")); // NOI18N
+        setTitle(resourceMap.getString("title")+" "+Version.ID); // NOI18N
         setModal(true);
         setName("aboutBox"); // NOI18N
         setResizable(false);
@@ -54,14 +54,14 @@ public class R66ClientGuiAboutBox extends javax.swing.JDialog {
         closeButton.setName("closeButton"); // NOI18N
 
         appTitleAboutLabel.setFont(appTitleAboutLabel.getFont().deriveFont(appTitleAboutLabel.getFont().getStyle() | java.awt.Font.BOLD, appTitleAboutLabel.getFont().getSize()+4));
-        appTitleAboutLabel.setText(resourceMap.getString("title")); // NOI18N
+        appTitleAboutLabel.setText(resourceMap.getString("title")+" "+Version.ID); // NOI18N
         appTitleAboutLabel.setName("appTitleAboutLabel"); // NOI18N
 
         versionLabel.setFont(versionLabel.getFont().deriveFont(versionLabel.getFont().getStyle() | java.awt.Font.BOLD));
         versionLabel.setText(resourceMap.getString("versionLabel.text")); // NOI18N
         versionLabel.setName("versionLabel"); // NOI18N
 
-        appVersionLabel.setText(resourceMap.getString("Application.version")); // NOI18N
+        appVersionLabel.setText(Version.ID); // NOI18N
         appVersionLabel.setName("appVersionLabel"); // NOI18N
 
         vendorLabel.setFont(vendorLabel.getFont().deriveFont(vendorLabel.getFont().getStyle() | java.awt.Font.BOLD));

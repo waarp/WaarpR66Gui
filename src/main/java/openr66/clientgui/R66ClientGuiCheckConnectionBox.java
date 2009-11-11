@@ -41,7 +41,7 @@ public class R66ClientGuiCheckConnectionBox extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(openr66.clientgui.R66ClientGuiApp.class).getContext().getResourceMap(R66ClientGuiCheckConnectionBox.class);
-        setTitle(resourceMap.getString("title")); // NOI18N
+        setTitle(resourceMap.getString("title")+" "+Version.ID); // NOI18N
         setModal(true);
         setName("checkConnectionBox"); // NOI18N
         setResizable(false);
