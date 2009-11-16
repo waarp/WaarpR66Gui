@@ -3,7 +3,7 @@
   <groupId>GoldenGate</groupId>
   <artifactId>GoldenGateR66Gui</artifactId>
   <name>GoldenGate OpenR66 Client GUI</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>GUI to enable to check connection or to make synchronous transfers with a remote
   OpenR66 Server with a client with no Database support</description>
   <url>http://openr66.free.fr/GoldenGateR66</url>
@@ -100,7 +100,7 @@
     <dependency>
       <groupId>GoldenGate</groupId>
       <artifactId>GoldenGateR66</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
     	<groupId>org.jdesktop</groupId>
