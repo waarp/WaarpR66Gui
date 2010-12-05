@@ -109,7 +109,7 @@ public class R66ClientGui {
         long time1 = System.currentTimeMillis();
         R66Future future = new R66Future(true);
         DirectTransfer transaction = new DirectTransfer(future, GuiHostId,
-                GuiFile, GuiRule, GuiInfo, GuiMd5, 65536, networkTransaction);
+                GuiFile, GuiRule, GuiInfo, GuiMd5, 65536, DbConstant.ILLEGALVALUE, networkTransaction);
         logger.debug("Launch transfer: "+GuiHostId+":"+GuiRule+":"+GuiFile);
         transaction.run();
         future.awaitUninterruptibly();
