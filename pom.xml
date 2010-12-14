@@ -120,6 +120,24 @@
       <groupId>GoldenGate</groupId>
       <artifactId>GoldenGateCommon</artifactId>
       <version>1.0.9</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>xercesImpl</artifactId>
+      		<groupId>xerces</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>xml-apis</artifactId>
+      		<groupId>xml-apis</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>jdom</artifactId>
+      		<groupId>jdom</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>xom</artifactId>
+      		<groupId>xom</groupId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>GoldenGate</groupId>
