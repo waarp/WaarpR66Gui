@@ -37,8 +37,8 @@ import openr66.context.R66Result;
 import openr66.database.DbConstant;
 import openr66.database.data.DbHostAuth;
 import openr66.database.data.DbRule;
-import goldengate.common.database.exception.OpenR66DatabaseNoConnectionError;
-import goldengate.common.database.exception.OpenR66DatabaseSqlError;
+import goldengate.common.database.exception.GoldenGateDatabaseNoConnectionError;
+import goldengate.common.database.exception.GoldenGateDatabaseSqlError;
 import openr66.protocol.configuration.Configuration;
 import openr66.protocol.localhandler.packet.TestPacket;
 import openr66.protocol.localhandler.packet.ValidPacket;
@@ -174,11 +174,11 @@ public class R66ClientGui {
         DbHostAuth[] dbHostAuths;
         try {
             dbHostAuths = DbHostAuth.getAllHosts(null);
-        } catch (OpenR66DatabaseNoConnectionError e) {
+        } catch (GoldenGateDatabaseNoConnectionError e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
-        } catch (OpenR66DatabaseSqlError e) {
+        } catch (GoldenGateDatabaseSqlError e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
@@ -199,11 +199,11 @@ public class R66ClientGui {
         DbRule[] dbRules;
         try {
             dbRules = DbRule.getAllRules(null);
-        } catch (OpenR66DatabaseNoConnectionError e) {
+        } catch (GoldenGateDatabaseNoConnectionError e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
-        } catch (OpenR66DatabaseSqlError e) {
+        } catch (GoldenGateDatabaseSqlError e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
