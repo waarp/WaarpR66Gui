@@ -27,8 +27,6 @@ import goldengate.common.logging.GgSlf4JLoggerFactory;
 
 import org.jboss.netty.logging.InternalLoggerFactory;
 
-import ch.qos.logback.classic.Level;
-
 import openr66.client.DirectTransfer;
 import openr66.client.Message;
 import openr66.configuration.FileBasedConfiguration;
@@ -59,8 +57,7 @@ public class R66ClientGui {
     public static NetworkTransaction networkTransaction = null;
 
     public static void main(String[] args) {
-        InternalLoggerFactory.setDefaultFactory(new GgSlf4JLoggerFactory(
-                Level.WARN));
+        InternalLoggerFactory.setDefaultFactory(new GgSlf4JLoggerFactory(null));
         if (logger == null) {
             logger = GgInternalLoggerFactory.getLogger(R66ClientGui.class);
         }
