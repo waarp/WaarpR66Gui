@@ -20,21 +20,16 @@
  */
 package openr66.r66gui;
 
-import javax.swing.JEditorPane;
-import javax.swing.JProgressBar;
-
-import org.jboss.netty.logging.InternalLoggerFactory;
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
-
 import goldengate.common.database.exception.GoldenGateDatabaseException;
 import goldengate.common.database.exception.GoldenGateDatabaseNoConnectionError;
 import goldengate.common.database.exception.GoldenGateDatabaseSqlError;
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
 import goldengate.common.logging.GgSlf4JLoggerFactory;
+
+import javax.swing.JEditorPane;
+import javax.swing.JProgressBar;
+
 import openr66.client.Message;
 import openr66.configuration.FileBasedConfiguration;
 import openr66.context.ErrorCode;
@@ -48,6 +43,12 @@ import openr66.protocol.localhandler.packet.ValidPacket;
 import openr66.protocol.networkhandler.NetworkTransaction;
 import openr66.protocol.utils.ChannelUtils;
 import openr66.protocol.utils.R66Future;
+
+import org.jboss.netty.logging.InternalLoggerFactory;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  * @author Frederic Bregier
