@@ -36,6 +36,8 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
     private JEditorPane textFieldStatus;
     private boolean firstCall = true;
     private int nbBlock = 1;
+    private long lastTime = System.currentTimeMillis();
+    private int lastRank = 0;
     
     /**
      * @param future
@@ -75,12 +77,19 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
             }
             firstCall = false;
         }
+        long newtime = System.currentTimeMillis()+1;
+        int sendsize = ((currentBlock-lastRank)*blocksize);
+        long time = ((newtime-lastTime)*1024)/1000;
+        long speedKB = sendsize/time;
         if (filesize == 0) {
-            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize));
+            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize)+" at "+speedKB+" KB/s");
         } else {
             this.progressBar.setValue(currentBlock*100/nbBlock);
-            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize)+" on "+filesize);
+            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize)+
+                    " on "+filesize+" at "+speedKB+" KB/s");
         }
+        lastTime = newtime-1;
+        lastRank = currentBlock;
     }
 
     /* (non-Javadoc)

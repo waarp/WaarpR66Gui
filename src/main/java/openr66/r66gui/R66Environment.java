@@ -134,7 +134,7 @@ public class R66Environment {
         R66Future future = new R66Future(true);
         ProgressDirectTransfer transaction = new ProgressDirectTransfer(future, hostId,
                 filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE, 
-                DbConstant.ILLEGALVALUE, networkTransaction, 100,
+                DbConstant.ILLEGALVALUE, networkTransaction, 500,
                 progressBar, textFieldStatus);
         logger.debug("Launch transfer: "+hostId+":"+ruleId+":"+filePath);
         transaction.run();
