@@ -551,6 +551,7 @@ public class R66ClientGui {
         comboBoxHosts.setEnabled(false);
         comboBoxRules.setEnabled(false);
         checkBoxMD5.setEnabled(false);
+        checkBoxDebug.setEnabled(false);
     }
     public void enableAllButtons() {
         //frmRClientGui.setEnabled(true);
@@ -563,6 +564,7 @@ public class R66ClientGui {
         comboBoxHosts.setEnabled(true);
         comboBoxRules.setEnabled(true);
         checkBoxMD5.setEnabled(true);
+        checkBoxDebug.setEnabled(true);
         frmRClientGui.toFront();
     }
     

@@ -76,10 +76,10 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
             firstCall = false;
         }
         if (filesize == 0) {
-            this.textFieldStatus.setText("Bytes received: "+(currentBlock*blocksize));
+            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize));
         } else {
             this.progressBar.setValue(currentBlock*100/nbBlock);
-            this.textFieldStatus.setText("Bytes received: "+(currentBlock*blocksize)+" on "+filesize);
+            this.textFieldStatus.setText("Bytes transmitted: "+(currentBlock*blocksize)+" on "+filesize);
         }
     }
 
@@ -90,10 +90,10 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
     public void lastCallBack(boolean success, int currentBlock, int blocksize) {
         this.progressBar.setIndeterminate(false);
         if (filesize == 0) {
-            this.textFieldStatus.setText("Finally Bytes received: "+(currentBlock*blocksize)+" with Status: "+success);
+            this.textFieldStatus.setText("Finally Bytes transmitted: "+(currentBlock*blocksize)+" with Status: "+success);
         } else {
             this.progressBar.setValue(100);
-            this.textFieldStatus.setText("Finally Bytes received: "+(currentBlock*blocksize)+" with Status: "+success);
+            this.textFieldStatus.setText("Finally Bytes transmitted: "+(currentBlock*blocksize)+" with Status: "+success);
         }
     }
 }
