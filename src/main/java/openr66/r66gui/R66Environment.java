@@ -246,13 +246,13 @@ public class R66Environment {
             		"<td width=13% align=center><b>Port</b></td><td width=5% align=center><b>SSL</b></td>" +
             		"<td width=13% align=center><b>HostKey</b></td><td width=5% align=center><b>Admin Role</b></td>" +
             		"<td width=5% align=center><b>IsClient</b></td></tr>" +
-            		"<tr><td width=13% align=center><input type=text name=host size=20 value=XXXHOSTXXX disabled></td>"+
-                "<td width=13% align=center><input type=text name=address size=20 value=XXXADDRXXX disabled></td>"+
-                "<td width=13% align=center><input type=text name=port size=20 value=XXXPORTXXX disabled></td>"+
-                "<td width=5% align=center><input type=checkbox name=ssl value=on XXXSSLXXX disabled></td>"+
-                "<td width=13% align=center><input type=password name=hostkey size=20 value=XXXKEYXXX disabled></td>"+
-                "<td width=5% align=center><input type=checkbox name=admin value=on XXXADMXXX disabled></td>"+
-                "<td width=5% align=center><input type=checkbox name=isclient value=on XXXISCXXX disabled></td></tr></table>";
+            		"<tr><td width=13% align=center>XXXHOSTXXX</td>"+
+                "<td width=13% align=center>XXXADDRXXX</td>"+
+                "<td width=13% align=center>XXXPORTXXX</td>"+
+                "<td width=5% align=center><input type=checkbox name=ssl value=on XXXSSLXXX disabled readonly></td>"+
+                "<td width=13% align=center>XXXKEYXXX</td>"+
+                "<td width=5% align=center><input type=checkbox name=admin value=on XXXADMXXX disabled readonly></td>"+
+                "<td width=5% align=center><input type=checkbox name=isclient value=on XXXISCXXX disabled readonly></td></tr></table>";
             return host.toSpecializedHtml(null, hosthtml, true);
         }
         return "HostId: "+id;
@@ -269,30 +269,30 @@ public class R66Environment {
             		"<td width=6% align=center><b>Host Ids</b></td><td width=6% align=center><b>RecvPath</b></td>" +
             		"<td width=6% align=center><b>SendPath</b></td><td width=7% align=center><b>ArchivePath</b></td>" +
             		"<td width=7% align=center><b>WorkPath</b></td></tr><tr>" +
-            		"<td width=6% align=center><input type=text name=rule size=20 value=XXXRULEXXX disabled></td>" +
+            		"<td width=6% align=center>XXXRULEXXX</td>" +
             		"<td width=6% align=center><input type=radio value=send name=mode XXXSENDXXX disabled>SEND" +
-            		"<input type=radio name=mode value=recv XXXRECVXXX disabled>RECV<br>" +
-            		"<input type=radio name=mode value=sendmd5 XXXSENDMXXX disabled>SENDMD5" +
-            		"<input type=radio name=mode value=recvmd5 XXXRECVMXXX disabled>RECVMD5<br>" +
-            		"<input type=radio value=sendth name=mode XXXSENDTXXX disabled>SENDTHROUGH<br>" +
-            		"<input type=radio name=mode value=recvth XXXRECVTXXX disabled>RECVTHROUGH<br>" +
-            		"<input type=radio name=mode value=sendthmd5 XXXSENDMTXXX disabled>SENDMD5THROUGH<br>" +
-            		"<input type=radio name=mode value=recvthmd5 XXXRECVMTXXX disabled>RECVMD5THROUGH</td>" +
-            		"<td width=6% align=center><textarea rows=5 name=hostids cols=20 disabled>XXXIDSXXX</textarea></td>" +
-            		"<td width=6% align=center><input type=text name=recvp size=20 value=XXXRPXXX disabled></td>" +
-            		"<td width=6% align=center><input type=text name=sendp size=20 value=XXXSPXXX disabled></td>" +
-            		"<td width=7% align=center><input type=text name=archp size=20 value=XXXAPXXX disabled></td>" +
-            		"<td width=7% align=center><input type=text name=workp size=20 value=XXXWPXXX disabled></td></tr><tr>" +
+            		"<input type=radio name=mode value=recv XXXRECVXXX disabled readonly>RECV<br>" +
+            		"<input type=radio name=mode value=sendmd5 XXXSENDMXXX disabled readonly>SENDMD5" +
+            		"<input type=radio name=mode value=recvmd5 XXXRECVMXXX disabled readonly>RECVMD5<br>" +
+            		"<input type=radio value=sendth name=mode XXXSENDTXXX disabled readonly>SENDTHROUGH<br>" +
+            		"<input type=radio name=mode value=recvth XXXRECVTXXX disabled readonly>RECVTHROUGH<br>" +
+            		"<input type=radio name=mode value=sendthmd5 XXXSENDMTXXX disabled readonly>SENDMD5THROUGH<br>" +
+            		"<input type=radio name=mode value=recvthmd5 XXXRECVMTXXX disabled readonly>RECVMD5THROUGH</td>" +
+            		"<td width=6% align=center><PRE>XXXIDSXXX</PRE></td>" +
+            		"<td width=6% align=center><PRE>XXXRPXXX</PRE></td>" +
+            		"<td width=6% align=center><PRE>XXXSPXXX</PRE></td>" +
+            		"<td width=7% align=center><PRE>XXXAPXXX</PRE></td>" +
+            		"<td width=7% align=center><PRE>XXXWPXXX</PRE></td></tr><tr>" +
             		"<td width=7% align=center><b>Recv Pre</b></td><td width=7% align=center><b>Recv Post</b></td>" +
             		"<td width=7% align=center><b>Recv Error</b></td><td width=7% align=center><b>Send Pre</b></td>" +
             		"<td width=7% align=center><b>Send Post</b></td><td width=7% align=center><b>Send Error</b></td>" +
             		"<td width=8%>&nbsp;</td></tr><tr>" +
-            		"<td width=7%><textarea rows=8 name=rpre cols=20 disabled>XXXRPTXXX</textarea></td>" +
-            		"<td width=7%><textarea rows=8 name=rpost cols=20 disabled>XXXRSTXXX</textarea></td>" +
-            		"<td width=7%><textarea rows=8 name=rerr cols=20 disabled>XXXRETXXX</textarea></td>" +
-            		"<td width=7%><textarea rows=8 name=spre cols=20 disabled>XXXSPTXXX</textarea></td>" +
-            		"<td width=8%><textarea rows=8 name=spost cols=20 disabled>XXXSSTXXX</textarea></td>" +
-            		"<td width=8%><textarea rows=8 name=serr cols=20 disabled>XXXSETXXX</textarea></td>" +
+            		"<td width=7%><PRE>XXXRPTXXX</PRE></td>" +
+            		"<td width=7%><PRE>XXXRSTXXX</PRE></td>" +
+            		"<td width=7%><PRE>XXXRETXXX</PRE></td>" +
+            		"<td width=7%><PRE>XXXSPTXXX</PRE></td>" +
+            		"<td width=8%><PRE>XXXSSTXXX</PRE></td>" +
+            		"<td width=8%><PRE>XXXSETXXX</PRE></td>" +
             		"</tr></table>";
             return rule.toSpecializedHtml(null, rulehtml);
         }
