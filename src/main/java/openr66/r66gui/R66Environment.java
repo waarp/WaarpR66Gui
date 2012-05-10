@@ -81,7 +81,7 @@ public class R66Environment {
             System.exit(2);
         }
         if (! FileBasedConfiguration
-                .setClientConfigurationFromXml(args[0])) {
+                .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
                     .error("Needs a correct configuration file as first argument");
             if (DbConstant.admin != null && DbConstant.admin.isConnected) {
