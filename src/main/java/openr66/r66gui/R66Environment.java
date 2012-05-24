@@ -116,7 +116,7 @@ public class R66Environment {
         Message transaction = new Message(networkTransaction, result,
                 hostId, packet);
         transaction.run();
-        result.awaitUninterruptibly();
+        result.awaitUninterruptibly(30000);
         if (result.isSuccess()) {
             R66Result r66result = result.getResult();
             ValidPacket info = (ValidPacket) r66result.other;
