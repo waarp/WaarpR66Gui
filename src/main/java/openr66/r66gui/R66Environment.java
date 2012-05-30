@@ -21,8 +21,8 @@
 package openr66.r66gui;
 
 import goldengate.common.database.exception.GoldenGateDatabaseException;
-import goldengate.common.database.exception.GoldenGateDatabaseNoConnectionError;
-import goldengate.common.database.exception.GoldenGateDatabaseSqlError;
+import goldengate.common.database.exception.GoldenGateDatabaseNoConnectionException;
+import goldengate.common.database.exception.GoldenGateDatabaseSqlException;
 import goldengate.common.logging.GgInternalLogger;
 import goldengate.common.logging.GgInternalLoggerFactory;
 import goldengate.common.logging.GgSlf4JLoggerFactory;
@@ -188,11 +188,11 @@ public class R66Environment {
         DbHostAuth[] dbHostAuths;
         try {
             dbHostAuths = DbHostAuth.getAllHosts(null);
-        } catch (GoldenGateDatabaseNoConnectionError e) {
+        } catch (GoldenGateDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
-        } catch (GoldenGateDatabaseSqlError e) {
+        } catch (GoldenGateDatabaseSqlException e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
@@ -213,11 +213,11 @@ public class R66Environment {
         DbRule[] dbRules;
         try {
             dbRules = DbRule.getAllRules(null);
-        } catch (GoldenGateDatabaseNoConnectionError e) {
+        } catch (GoldenGateDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
-        } catch (GoldenGateDatabaseSqlError e) {
+        } catch (GoldenGateDatabaseSqlException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
