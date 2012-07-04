@@ -7,19 +7,14 @@
   </skin>
   <publishDate/><version/>
   <bannerLeft>
-    <name>GoldenGate Project</name>
-    <src>images/goldengatesmall.jpg</src>
-    <href>http://openr66.free.fr/</href>
+    <name>Waarp Project</name>
+    <src>images/waarp.jpg</src>
+    <href>http://www.waarp.it</href>
   </bannerLeft>
   <body>
     <links>
-    	<item name="GoldenGate" href="http://openr66.free.fr/"/>
+    	<item name="Waarp" href="http://www.waarp.it/"/>
     </links>
-  	<menu name="GoldenGate OpenR66 Client Gui">
-  		<item name="Overview of OpenR66 Client Gui" href="index.html"/>
-  		<item name="Main page of OpenR66" href="../OpenR66.html"/>
-  		<item name="GoldenGate Main Project" href="../"/>
-  	</menu>
     <menu ref="reports"/>
   </body>
 </project>

@@ -1,31 +1,32 @@
 /**
-   This file is part of GoldenGate Project (named also GoldenGate or GG).
+   This file is part of Waarp Project.
 
    Copyright 2009, Frederic Bregier, and individual contributors by the @author
    tags. See the COPYRIGHT.txt in the distribution for a full listing of
    individual contributors.
 
-   All GoldenGate Project is free software: you can redistribute it and/or 
+   All Waarp Project is free software: you can redistribute it and/or 
    modify it under the terms of the GNU General Public License as published 
    by the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
-   GoldenGate is distributed in the hope that it will be useful,
+   Waarp is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
+   along with Waarp .  If not, see <http://www.gnu.org/licenses/>.
  */
-package openr66.r66gui;
+package org.waarp.openr66.r66gui;
 
 import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
 
-import openr66.client.ProgressBarTransfer;
-import openr66.protocol.networkhandler.NetworkTransaction;
-import openr66.protocol.utils.R66Future;
+import org.waarp.openr66.client.ProgressBarTransfer;
+import org.waarp.openr66.protocol.networkhandler.NetworkTransaction;
+import org.waarp.openr66.protocol.utils.R66Future;
+
 
 /**
  * @author Frederic Bregier
@@ -66,7 +67,7 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
     }
 
     /* (non-Javadoc)
-     * @see openr66.client.ProgressBarTransfer#callBack(int, int)
+     * @see org.waarp.openr66.client.ProgressBarTransfer#callBack(int, int)
      */
     @Override
     public void callBack(int currentBlock, int blocksize) {
@@ -93,7 +94,7 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
     }
 
     /* (non-Javadoc)
-     * @see openr66.client.ProgressBarTransfer#lastCallBack(boolean, int, int)
+     * @see org.waarp.openr66.client.ProgressBarTransfer#lastCallBack(boolean, int, int)
      */
     @Override
     public void lastCallBack(boolean success, int currentBlock, int blocksize) {
