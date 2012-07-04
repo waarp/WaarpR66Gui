@@ -1,21 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>GoldenGate</groupId>
-  <artifactId>GoldenGateR66Gui</artifactId>
-  <version>2.0.3</version>
-  <name>GoldenGate R66 Client Gui</name>
+  <artifactId>WaarpR66Gui</artifactId>
+  <version>2.1.0</version>
+  <name>Waarp R66 Client Gui</name>
   <description>GUI to enable to check connectivity or to make synchronous transfer with a remote R66 Server with a client with no Database support</description>
-  <url>http://openr66.free.fr/GoldenGateR66</url>
+  <url>http://waarp.github.com/WaarpDigest</url>
   <inceptionYear>2009</inceptionYear>
   <parent>
-    <groupId>GoldenGate</groupId>
+    <groupId>Waarp</groupId>
     <artifactId>persistence-deps</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
   </parent>
+  <issueManagement>
+	<system>GitHub</system>
+  	<url>https://github.com/waarp/WaarpDigest/issues/</url>
+  </issueManagement>
   <scm>
-  	<connection>scm:svn:http://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateR66Gui/trunk</connection>
-  	<developerConnection>scm:svn:https://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateR66Gui/trunk</developerConnection>
-  	<url>http://goldengate.svn.sourceforge.net/svnroot/goldengate/GoldenGateR66Gui/trunk</url>
+  	<connection>scm:git:git://github.com/waarp/WaarpDigest.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpDigest.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpDigest</url>
   </scm>
   <licenses>
   	<license>
@@ -25,9 +28,9 @@
   </licenses>
   <repositories>
   	<repository>
-  		<id>goldengate.releases</id>
-  		<name>GoldenGate releases</name>
-  		<url>http://openr66.free.fr/maven2</url>
+  		<id>waarp.releases</id>
+  		<name>Waarp releases</name>
+  		<url>http://waarp.github.com/Waarp/maven2</url>
   		<releases>
   			<enabled>true</enabled>
   		</releases>
@@ -38,9 +41,9 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>GoldenGate</groupId>
-      <artifactId>GoldenGateR66</artifactId>
-      <version>2.3.1</version>
+      <groupId>Waarp</groupId>
+      <artifactId>WaarpR66</artifactId>
+      <version>2.4.0</version>
     </dependency>
   </dependencies>
   <properties>
@@ -65,11 +68,11 @@
                 <mkdir dir="${project.build.directory}"/>
                 <mkdir dir="${project.build.directory}/classes"/>
                 <echo message="${project.version}" file="${project.build.directory}/version.txt" />
-                <echo message="// DO NOT MODIFY - WILL BE OVERWRITTEN DURING THE BUILD PROCESS${line.separator}package openr66.r66gui;${line.separator}/** Provides the version information of GoldenGate R66 Gui. */${line.separator}public final class Version {${line.separator} /** The version identifier. */${line.separator} public static final String ID = &quot;${project.version}&quot;;${line.separator} /** Prints out the version identifier to stdout. */${line.separator} public static void main(String[] args) { System.out.println(ID); }${line.separator} private Version() { super(); }${line.separator}}${line.separator}" file="${basedir}/src/main/java/openr66/r66gui/Version.java" />
+                <echo message="// DO NOT MODIFY - WILL BE OVERWRITTEN DURING THE BUILD PROCESS${line.separator}package org.waarp.openr66.r66gui;${line.separator}/** Provides the version information of Waarp R66 Gui. */${line.separator}public final class Version {${line.separator} /** The version identifier. */${line.separator} public static final String ID = &quot;${project.version}&quot;;${line.separator} /** Prints out the version identifier to stdout. */${line.separator} public static void main(String[] args) { System.out.println(ID); }${line.separator} private Version() { super(); }${line.separator}}${line.separator}" file="${basedir}/src/main/java/org/waarp/openr66/r66gui/Version.java" />
                 <echo message="${project.artifactId}" />
                 <taskdef resource="net/sf/antcontrib/antlib.xml" />
                 <if>
-                <equals arg1="${project.artifactId}" arg2="GoldenGateR66Gui"/>
+                <equals arg1="${project.artifactId}" arg2="WaarpR66Gui"/>
                 <then>
                 	<mkdir dir="${project.build.directory}/site"/>
                 </then>
@@ -171,15 +174,15 @@
 	          <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
 	          <additionalparam>
 	            -link http://java.sun.com/javase/6/docs/api/
-	            -link http://jboss.org/file-access/default/members/netty/freezone/api/3.1/
+	            -link http://static.netty.io/3.5/api/
 
-				-group "R66 Client Gui package" "openr66.r66gui*"
+				-group "Waarp R66 Client Gui package" "org.waarp.openr66.r66gui*"
 
 	            -sourceclasspath ${basedir}/target/classes
 	          </additionalparam>
 	          <encoding>UTF-8</encoding>
 	          <locale>en_US</locale>
-	          <excludePackageNames>${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
+	          <excludePackageNames>${project.groupId}.test*:${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
           </configuration>
           <reports>
            <report>aggregate</report>

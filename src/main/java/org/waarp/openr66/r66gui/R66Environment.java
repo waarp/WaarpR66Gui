@@ -1,51 +1,51 @@
 /**
-   This file is part of GoldenGate Project (named also GoldenGate or GG).
+   This file is part of Waarp Project.
 
    Copyright 2009, Frederic Bregier, and individual contributors by the @author
    tags. See the COPYRIGHT.txt in the distribution for a full listing of
    individual contributors.
 
-   All GoldenGate Project is free software: you can redistribute it and/or 
+   All Waarp Project is free software: you can redistribute it and/or 
    modify it under the terms of the GNU General Public License as published 
    by the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
-   GoldenGate is distributed in the hope that it will be useful,
+   Waarp is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with GoldenGate .  If not, see <http://www.gnu.org/licenses/>.
+   along with Waarp .  If not, see <http://www.gnu.org/licenses/>.
  */
-package openr66.r66gui;
+package org.waarp.openr66.r66gui;
 
-import goldengate.common.database.exception.GoldenGateDatabaseException;
-import goldengate.common.database.exception.GoldenGateDatabaseNoConnectionException;
-import goldengate.common.database.exception.GoldenGateDatabaseSqlException;
-import goldengate.common.logging.GgInternalLogger;
-import goldengate.common.logging.GgInternalLoggerFactory;
-import goldengate.common.logging.GgSlf4JLoggerFactory;
 
 import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
 
-import openr66.client.Message;
-import openr66.configuration.FileBasedConfiguration;
-import openr66.context.ErrorCode;
-import openr66.context.R66Result;
-import openr66.database.DbConstant;
-import openr66.database.data.DbHostAuth;
-import openr66.database.data.DbRule;
-import openr66.protocol.configuration.Configuration;
-import openr66.protocol.localhandler.packet.TestPacket;
-import openr66.protocol.localhandler.packet.ValidPacket;
-import openr66.protocol.networkhandler.NetworkTransaction;
-import openr66.protocol.utils.ChannelUtils;
-import openr66.protocol.utils.R66Future;
 
 import org.jboss.netty.logging.InternalLoggerFactory;
 import org.slf4j.LoggerFactory;
+import org.waarp.common.database.exception.WaarpDatabaseException;
+import org.waarp.common.database.exception.WaarpDatabaseNoConnectionException;
+import org.waarp.common.database.exception.WaarpDatabaseSqlException;
+import org.waarp.common.logging.WaarpInternalLogger;
+import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
+import org.waarp.openr66.client.Message;
+import org.waarp.openr66.configuration.FileBasedConfiguration;
+import org.waarp.openr66.context.ErrorCode;
+import org.waarp.openr66.context.R66Result;
+import org.waarp.openr66.database.DbConstant;
+import org.waarp.openr66.database.data.DbHostAuth;
+import org.waarp.openr66.database.data.DbRule;
+import org.waarp.openr66.protocol.configuration.Configuration;
+import org.waarp.openr66.protocol.localhandler.packet.TestPacket;
+import org.waarp.openr66.protocol.localhandler.packet.ValidPacket;
+import org.waarp.openr66.protocol.networkhandler.NetworkTransaction;
+import org.waarp.openr66.protocol.utils.ChannelUtils;
+import org.waarp.openr66.protocol.utils.R66Future;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -58,7 +58,7 @@ public class R66Environment {
     /**
      * Internal Logger
      */
-    static protected volatile GgInternalLogger logger;
+    static protected volatile WaarpInternalLogger logger;
 
 
     public String ruleId = null;
@@ -72,9 +72,9 @@ public class R66Environment {
     public String GuiResultat;
     
     public void initialize(String []args) {
-        InternalLoggerFactory.setDefaultFactory(new GgSlf4JLoggerFactory(null));
+        InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
         if (logger == null) {
-            logger = GgInternalLoggerFactory.getLogger(R66ClientGui.class);
+            logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
         }
         if (args.length < 1) {
             System.err.println("Need client with no database support configuration file as argument");
@@ -188,11 +188,11 @@ public class R66Environment {
         DbHostAuth[] dbHostAuths;
         try {
             dbHostAuths = DbHostAuth.getAllHosts(null);
-        } catch (GoldenGateDatabaseNoConnectionException e) {
+        } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
-        } catch (GoldenGateDatabaseSqlException e) {
+        } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
             results[0] = "NoHostFound";
             return results;
@@ -213,11 +213,11 @@ public class R66Environment {
         DbRule[] dbRules;
         try {
             dbRules = DbRule.getAllRules(null);
-        } catch (GoldenGateDatabaseNoConnectionException e) {
+        } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
-        } catch (GoldenGateDatabaseSqlException e) {
+        } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
             return results;
@@ -238,7 +238,7 @@ public class R66Environment {
         DbHostAuth host = null;
         try {
             host = new DbHostAuth(null, id);
-        } catch (GoldenGateDatabaseException e) {
+        } catch (WaarpDatabaseException e) {
         }
         if (host != null) {
             String hosthtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>" +
@@ -261,7 +261,7 @@ public class R66Environment {
         DbRule rule = null;
         try {
             rule = new DbRule(null, id);
-        } catch (GoldenGateDatabaseException e) {
+        } catch (WaarpDatabaseException e) {
         }
         if (rule != null) {
             String rulehtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>" +
