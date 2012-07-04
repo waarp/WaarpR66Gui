@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.3" timestamp="2012-07-05T00:06:40.243">
+<file name="J:\Git\github\waarp-digest\WaarpR66Gui\src\main\java\com\swtdesigner\FocusTraversalOnArray.java">
+<violation beginline="33" endline="33" begincolumn="17" endcolumn="28" rule="UnnecessaryLocalBeforeReturn" ruleset="Design Rules" package="com.swtdesigner" class="FocusTraversalOnArray" method="indexCycle" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#UnnecessaryLocalBeforeReturn" priority="3">
+Consider simply returning the value vs storing it in local variable 'next'
+</violation>
+<violation beginline="40" endline="40" begincolumn="37" endcolumn="50" rule="CompareObjectsWithEquals" ruleset="Design Rules" package="com.swtdesigner" class="FocusTraversalOnArray" method="cycle" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#CompareObjectsWithEquals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpR66Gui\src\main\java\org\waarp\openr66\r66gui\ProgressDirectTransfer.java">
+<violation beginline="36" endline="36" begincolumn="26" endcolumn="36" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="ProgressDirectTransfer" variable="progressBar" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'progressBar' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="37" endline="37" begincolumn="25" endcolumn="39" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="ProgressDirectTransfer" variable="textFieldStatus" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'textFieldStatus' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpR66Gui\src\main\java\org\waarp\openr66\r66gui\R66ClientGui.java">
+<violation beginline="75" endline="75" begincolumn="28" endcolumn="40" rule="ImmutableField" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui" variable="environnement" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ImmutableField" priority="3">
+Private field 'environnement' could be made final; it is only initialized in the declaration or constructor.
+</violation>
+<violation beginline="87" endline="87" begincolumn="13" endcolumn="35" rule="SingularField" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui" variable="scrollPane" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#SingularField" priority="3">
+Perhaps 'scrollPane' could be replaced by a local variable.
+</violation>
+<violation beginline="88" endline="88" begincolumn="13" endcolumn="37" rule="SingularField" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui" variable="scrollPane_1" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#SingularField" priority="3">
+Perhaps 'scrollPane_1' could be replaced by a local variable.
+</violation>
+<violation beginline="113" endline="113" begincolumn="9" endcolumn="20" rule="ConstructorCallsOverridableMethod" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConstructorCallsOverridableMethod" priority="1">
+Overridable method 'showDialog' called during object construction
+</violation>
+<violation beginline="405" endline="409" begincolumn="13" endcolumn="13" rule="ConfusingTernary" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui$R66ClientGuiActions" method="doInBackground" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="532" endline="540" begincolumn="13" endcolumn="13" rule="CollapsibleIfStatements" ruleset="Basic Rules" package="org.waarp.openr66.r66gui" class="R66ClientGui" method="setFindFile" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="J:\Git\github\waarp-digest\WaarpR66Gui\src\main\java\org\waarp\openr66\r66gui\R66Environment.java">
+<violation beginline="154" endline="155" begincolumn="26" endcolumn="46" rule="ConfusingTernary" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66Environment" method="startsTransfer" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="162" endline="163" begincolumn="22" endcolumn="42" rule="ConfusingTernary" ruleset="Design Rules" package="org.waarp.openr66.r66gui" class="R66Environment" method="startsTransfer" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#ConfusingTernary" priority="3">
+Avoid if (x != y) ..; else ..;
+</violation>
+<violation beginline="241" endline="242" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.waarp.openr66.r66gui" class="R66Environment" method="getHost" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="264" endline="265" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.waarp.openr66.r66gui" class="R66Environment" method="getRule" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+</pmd>
