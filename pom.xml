@@ -106,7 +106,7 @@
                         <exclude name="**/.*/**" />
                         <include name="**" />
                       </zipfileset>
-                      <zipfileset dir="${basedir}/src/main/java/openr66/r66gui" prefix="openr66/r66gui/">
+                      <zipfileset dir="${basedir}/src/main/java/org/waarp/openr66/r66gui" prefix="org/waarp/openr66/r66gui/">
                         <exclude name="**/.*/**" />
                         <exclude name="**/*.java/**" />
                       </zipfileset>
