@@ -4,7 +4,7 @@
   <version>2.1.0</version>
   <name>Waarp R66 Client Gui</name>
   <description>GUI to enable to check connectivity or to make synchronous transfer with a remote R66 Server with a client with no Database support</description>
-  <url>http://waarp.github.com/WaarpDigest</url>
+  <url>http://waarp.github.com/WaarpR66Gui</url>
   <inceptionYear>2009</inceptionYear>
   <parent>
     <groupId>Waarp</groupId>
@@ -13,12 +13,12 @@
   </parent>
   <issueManagement>
 	<system>GitHub</system>
-  	<url>https://github.com/waarp/WaarpDigest/issues/</url>
+  	<url>https://github.com/waarp/WaarpR66Gui/issues/</url>
   </issueManagement>
   <scm>
-  	<connection>scm:git:git://github.com/waarp/WaarpDigest.git</connection>
-  	<developerConnection>scm:git:git@github.com:YourID/WaarpDigest.git</developerConnection>
-  	<url>https://github.com/waarp/WaarpDigest</url>
+  	<connection>scm:git:git://github.com/waarp/WaarpR66Gui.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpR66Gui.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpR66Gui</url>
   </scm>
   <licenses>
   	<license>
