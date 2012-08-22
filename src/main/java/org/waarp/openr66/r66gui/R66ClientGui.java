@@ -33,6 +33,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -55,6 +56,9 @@ import javax.swing.SwingWorker;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import org.waarp.common.logging.WaarpInternalLogger;
+import org.waarp.common.logging.WaarpInternalLoggerFactory;
+
 import com.swtdesigner.FocusTraversalOnArray;
 
 /**
@@ -65,6 +69,12 @@ import com.swtdesigner.FocusTraversalOnArray;
  *
  */
 public class R66ClientGui {
+	/**
+     * Internal Logger
+     */
+    private static final WaarpInternalLogger logger = WaarpInternalLoggerFactory
+            .getLogger(R66ClientGui.class);
+
 
     public static String []static_args;
     public static R66ClientGui window;
@@ -512,7 +522,10 @@ public class R66ClientGui {
             int returnVal = fc.showOpenDialog(frmRClientGui);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                textFieldFile.setText(file.getAbsolutePath());
+                try {
+					textFieldFile.setText(file.getCanonicalPath());
+				} catch (IOException e) {
+				}
                 setFindFile();
                 environnement.GuiResultat = "New file sets";
             }
@@ -529,15 +542,14 @@ public class R66ClientGui {
             text = null;
         }
         if (text != null) {
-            if (text.contains(" ")) {
-                if (!text.startsWith("\"")) {
-                    text = "\""+text;
-                }
-                if (!text.endsWith("\"")) {
-                    text = text+"\"";
-                }
-                textFieldFile.setText(text);
-            }
+    		File file = new File(text);
+    		logger.debug("File: "+text+" : "+file.toURI().toString());
+    		if (file.exists()) {
+				text = file.toURI().toString();
+    		} else {
+    			text = "unknown file";
+    		}
+            textFieldFile.setText(text);
         }
     }
     public void disableAllButtons() {
