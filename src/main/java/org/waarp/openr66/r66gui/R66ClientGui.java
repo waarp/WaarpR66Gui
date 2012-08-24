@@ -56,9 +56,6 @@ import javax.swing.SwingWorker;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
-
 import com.swtdesigner.FocusTraversalOnArray;
 
 /**
@@ -69,12 +66,6 @@ import com.swtdesigner.FocusTraversalOnArray;
  *
  */
 public class R66ClientGui {
-	/**
-     * Internal Logger
-     */
-    private static final WaarpInternalLogger logger = WaarpInternalLoggerFactory
-            .getLogger(R66ClientGui.class);
-
 
     public static String []static_args;
     public static R66ClientGui window;
@@ -543,7 +534,6 @@ public class R66ClientGui {
         }
         if (text != null) {
     		File file = new File(text);
-    		logger.debug("File: "+text+" : "+file.toURI().toString());
     		if (file.exists()) {
 				text = file.toURI().toString();
     		} else {
