@@ -70,7 +70,7 @@ public class R66ClientGui {
     public static String []static_args;
     public static R66ClientGui window;
     
-    private JFrame frmRClientGui;
+    public JFrame frmRClientGui;
     private JTextField textFieldInformation;
     private JTextField textFieldFile;
     private R66Environment environnement = new R66Environment();
@@ -88,6 +88,7 @@ public class R66ClientGui {
     private JScrollPane scrollPane;
     private JScrollPane scrollPane_1;
     private JCheckBox checkBoxDebug;
+    protected boolean extended = false;
     
     /**
      * Launch the application.
@@ -107,6 +108,17 @@ public class R66ClientGui {
     }
 
     /**
+     * Used by extended class
+     */
+    protected R66ClientGui() {
+    	
+    }
+    
+    public R66Environment getEnvironment() {
+    	return environnement;
+    }
+    
+    /**
      * Create the application.
      */
     public R66ClientGui(String []args) {
@@ -117,7 +129,7 @@ public class R66ClientGui {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    protected void initialize() {
         String [] shosts = R66Environment.getHostIds();
         String [] srules = R66Environment.getRules();
         
@@ -125,13 +137,21 @@ public class R66ClientGui {
         frmRClientGui.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                environnement.exit();
-                System.exit(0);
+            	if (extended) {
+            		frmRClientGui.dispose();
+            	} else {
+            		environnement.exit();
+            		System.exit(0);
+            	}
             }
         });
         frmRClientGui.setTitle("R66 Client Gui");
         frmRClientGui.setBounds(100, 100, 724, 546);
-        frmRClientGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (extended) {
+            frmRClientGui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+        	frmRClientGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
         
         JMenuBar menuBar = new JMenuBar();
         frmRClientGui.setJMenuBar(menuBar);
@@ -142,8 +162,12 @@ public class R66ClientGui {
         JMenuItem menuItemExit = new JMenuItem("Exit");
         menuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                environnement.exit();
-                System.exit(0);
+            	if (extended) {
+            		frmRClientGui.dispose();
+            	} else {
+            		environnement.exit();
+            		System.exit(0);
+            	}
             }
         });
         menu.add(menuItemExit);
@@ -226,8 +250,8 @@ public class R66ClientGui {
         gbc_comboBoxRules.gridy = 1;
         frmRClientGui.getContentPane().add(comboBoxRules, gbc_comboBoxRules);
         
-        checkBoxMD5 = new JCheckBox("MD5");
-        checkBoxMD5.setToolTipText("Checked if you want that all packets are checked using MD5 (optional and not recommended if already using SSL)");
+        checkBoxMD5 = new JCheckBox("Digest");
+        checkBoxMD5.setToolTipText("Checked if you want that all packets are checked using a Digest (optional and not recommended if already using SSL)");
         GridBagConstraints gbc_checkBoxMD5 = new GridBagConstraints();
         gbc_checkBoxMD5.insets = new Insets(0, 0, 5, 0);
         gbc_checkBoxMD5.gridx = 4;
@@ -570,7 +594,7 @@ public class R66ClientGui {
         frmRClientGui.toFront();
     }
     
-    public class JTextAreaOutputStream extends OutputStream {
+    public static class JTextAreaOutputStream extends OutputStream {
         JTextArea ta;
 
         public JTextAreaOutputStream(JTextArea t) {
