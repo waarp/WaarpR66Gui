@@ -56,6 +56,11 @@ import javax.swing.SwingWorker;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import org.jboss.netty.logging.InternalLoggerFactory;
+import org.waarp.common.logging.WaarpInternalLogger;
+import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
+
 import com.swtdesigner.FocusTraversalOnArray;
 
 /**
@@ -66,6 +71,10 @@ import com.swtdesigner.FocusTraversalOnArray;
  *
  */
 public class R66ClientGui {
+	/**
+	 * Internal Logger
+	 */
+	private static WaarpInternalLogger logger = null;
 
     public static String []static_args;
     public static R66ClientGui window;
@@ -94,6 +103,10 @@ public class R66ClientGui {
      * Launch the application.
      */
     public static void main(String[] args) {
+    	InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
+		if (logger == null) {
+			logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+		}
         static_args = args;
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -111,7 +124,10 @@ public class R66ClientGui {
      * Used by extended class
      */
     protected R66ClientGui() {
-    	
+    	if (logger == null) {
+    		logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+    		environnement.initLog();
+    	}
     }
     
     public R66Environment getEnvironment() {
@@ -122,6 +138,10 @@ public class R66ClientGui {
      * Create the application.
      */
     public R66ClientGui(String []args) {
+    	if (logger == null) {
+    		logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+    		environnement.initLog();
+    	}
         environnement.initialize(args);
         initialize();
     }
@@ -488,6 +508,7 @@ public class R66ClientGui {
         stopRequest();
     }
     private void startTransfer() {
+    	logger.debug("start startTransfer");
         disableAllButtons();
         environnement.hostId = (String) comboBoxHosts.getSelectedItem();
         environnement.ruleId = (String) comboBoxRules.getSelectedItem();
@@ -520,6 +541,7 @@ public class R66ClientGui {
             environnement.ruleId = environnement.ruleId.trim();
         }
         if (ok) {
+        	logger.debug("start startTransfer: "+environnement.toString());
             environnement.startsTransfer(progressBarTransfer, textFieldStatus);
         } else {
             environnement.GuiResultat = "<html>Not enough arg to start the transfer:<br>   "+
@@ -561,7 +583,7 @@ public class R66ClientGui {
     		if (file.exists()) {
 				text = file.toURI().toString();
     		} else {
-    			text = "unknown file";
+    			//text = "unknown file";
     		}
             textFieldFile.setText(text);
         }

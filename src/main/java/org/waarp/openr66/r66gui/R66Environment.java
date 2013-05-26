@@ -71,11 +71,15 @@ public class R66Environment {
     public NetworkTransaction networkTransaction = null;
     public String GuiResultat;
     
-    public void initialize(String []args) {
-        InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
-        if (logger == null) {
+    public void initLog() {
+    	if (logger == null) {
             logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
         }
+    }
+    
+    public void initialize(String []args) {
+        InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
+        initLog();
         if (args.length < 1) {
             System.err.println("Need client with no database support configuration file as argument");
             System.exit(2);
@@ -130,13 +134,14 @@ public class R66Environment {
     }
 
     public boolean startsTransfer(JProgressBar progressBar, JEditorPane textFieldStatus) {
+    	logger.debug("start startTransfer2");
         long time1 = System.currentTimeMillis();
         R66Future future = new R66Future(true);
         ProgressDirectTransfer transaction = new ProgressDirectTransfer(future, hostId,
                 filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE, 
                 DbConstant.ILLEGALVALUE, networkTransaction, 500,
                 progressBar, textFieldStatus);
-        logger.debug("Launch transfer: "+hostId+":"+ruleId+":"+filePath);
+        logger.info("Launch transfer: "+hostId+":"+ruleId+":"+filePath);
         transaction.run();
         future.awaitUninterruptibly();
         progressBar.setIndeterminate(true);
@@ -233,6 +238,50 @@ public class R66Environment {
         }
         return results;
     }
+    public static String [] getRules(boolean sendMode) {
+        String []results = null;
+        DbRule[] dbRules;
+        try {
+            dbRules = DbRule.getAllRules(null);
+        } catch (WaarpDatabaseNoConnectionException e) {
+            results = new String[1];
+            results[0] = "NoRuleFound";
+            return results;
+        } catch (WaarpDatabaseSqlException e) {
+            results = new String[1];
+            results[0] = "NoRuleFound";
+            return results;
+        }
+        int len = 0;
+        for (DbRule rule : dbRules) {
+        	if (sendMode) {
+        		if (rule.isSendMode()) len++;
+        	} else {
+        		if (rule.isRecvMode()) len++;
+        	}
+        }
+        if (len == 0) {
+            results = new String[1];
+            results[0] = "NoRuleFound";
+            return results;
+        }
+        results = new String[len];
+        int i = 0;
+        for (DbRule rule : dbRules) {
+        	if (sendMode) {
+        		if (rule.isSendMode()) {
+                    results[i] = rule.idRule;
+                    i++;
+        		}
+        	} else {
+        		if (rule.isRecvMode()) {
+                    results[i] = rule.idRule;
+                    i++;
+        		}
+        	}
+        }
+        return results;
+    }
 
     public static String getHost(String id) {
         DbHostAuth host = null;
@@ -305,5 +354,9 @@ public class R66Environment {
             "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Exchanging files between a PC and a R66 Server</SPAN></FONT></P>"+
             "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Provide an example on how to use the R66 API in an application</SPAN></FONT></P>"+
             "</UL>";
+    }
+    
+    public String toString() {
+    	return "Env: "+ruleId+":"+hostId+":"+filePath+":"+isMD5+":"+isInRequest+":"+isClientSending+":"+information+":"+GuiResultat;
     }
 }
