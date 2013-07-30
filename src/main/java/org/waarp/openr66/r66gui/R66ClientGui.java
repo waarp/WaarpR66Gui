@@ -496,7 +496,7 @@ public class R66ClientGui {
         startRequest();
         disableAllButtons();
         environnement.hostId = (String) comboBoxHosts.getSelectedItem();
-        if (environnement.hostId == null || environnement.hostId.trim().length() <= 0) {
+        if (environnement.hostId == null || environnement.hostId.trim().isEmpty()) {
             environnement.hostId = "NO HOST";
             environnement.GuiResultat = "No Host specified!";
         } else {
@@ -517,24 +517,24 @@ public class R66ClientGui {
         environnement.isMD5 = checkBoxMD5.isSelected();
         
         boolean ok = true;
-        if (environnement.hostId == null || environnement.hostId.trim().length() <= 0) {
+        if (environnement.hostId == null || environnement.hostId.trim().isEmpty()) {
             environnement.hostId = "NO HOST";
             ok = false;
         } else {
             environnement.hostId = environnement.hostId.trim();
         }
-        if (environnement.filePath == null || environnement.filePath.trim().length() <= 0) {
+        if (environnement.filePath == null || environnement.filePath.trim().isEmpty()) {
             environnement.filePath = "NO FILE";
             ok = false;
         } else {
             environnement.filePath = environnement.filePath.trim();
         }
-        if (environnement.information == null || environnement.information.trim().length() <= 0) {
+        if (environnement.information == null || environnement.information.trim().isEmpty()) {
             environnement.information = "";
         } else {
             environnement.information = environnement.information.trim();
         }
-        if (environnement.ruleId == null || environnement.ruleId.trim().length() <= 0) {
+        if (environnement.ruleId == null || environnement.ruleId.trim().isEmpty()) {
             environnement.ruleId = "NO RULE";
             ok = false;
         } else {
