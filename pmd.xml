@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2013-07-30T21:18:59.026">
+<pmd version="4.3" timestamp="2013-09-15T20:31:26.170">
 <file name="J:\Git\github\waarp-digest\WaarpR66Gui\src\main\java\com\swtdesigner\FocusTraversalOnArray.java">
 <violation beginline="33" endline="33" begincolumn="17" endcolumn="28" rule="UnnecessaryLocalBeforeReturn" ruleset="Design Rules" package="com.swtdesigner" class="FocusTraversalOnArray" method="indexCycle" externalInfoUrl="http://pmd.sourceforge.net/rules/design.html#UnnecessaryLocalBeforeReturn" priority="3">
 Consider simply returning the value vs storing it in local variable 'next'
