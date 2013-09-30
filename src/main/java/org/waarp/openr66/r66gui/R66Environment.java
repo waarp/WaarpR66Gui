@@ -27,6 +27,7 @@ import javax.swing.JProgressBar;
 
 import org.jboss.netty.logging.InternalLoggerFactory;
 import org.slf4j.LoggerFactory;
+import org.waarp.common.database.DbSession;
 import org.waarp.common.database.exception.WaarpDatabaseException;
 import org.waarp.common.database.exception.WaarpDatabaseNoConnectionException;
 import org.waarp.common.database.exception.WaarpDatabaseSqlException;
@@ -191,8 +192,9 @@ public class R66Environment {
     public static String [] getHostIds() {
         String []results = null;
         DbHostAuth[] dbHostAuths;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
-            dbHostAuths = DbHostAuth.getAllHosts(null);
+            dbHostAuths = DbHostAuth.getAllHosts(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoHostFound";
@@ -216,8 +218,9 @@ public class R66Environment {
     public static String [] getRules() {
         String []results = null;
         DbRule[] dbRules;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
-            dbRules = DbRule.getAllRules(null);
+            dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
@@ -241,8 +244,9 @@ public class R66Environment {
     public static String [] getRules(boolean sendMode) {
         String []results = null;
         DbRule[] dbRules;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
-            dbRules = DbRule.getAllRules(null);
+            dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
             results[0] = "NoRuleFound";
@@ -285,8 +289,9 @@ public class R66Environment {
 
     public static String getHost(String id) {
         DbHostAuth host = null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
-            host = new DbHostAuth(null, id);
+            host = new DbHostAuth(session, id);
         } catch (WaarpDatabaseException e) {
         }
         if (host != null) {
@@ -308,8 +313,9 @@ public class R66Environment {
     }
     public static String getRule(String id) {
         DbRule rule = null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
-            rule = new DbRule(null, id);
+            rule = new DbRule(session, id);
         } catch (WaarpDatabaseException e) {
         }
         if (rule != null) {
