@@ -60,6 +60,7 @@ import org.jboss.netty.logging.InternalLoggerFactory;
 import org.waarp.common.logging.WaarpInternalLogger;
 import org.waarp.common.logging.WaarpInternalLoggerFactory;
 import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
+import org.waarp.openr66.protocol.configuration.Configuration;
 
 import com.swtdesigner.FocusTraversalOnArray;
 
@@ -165,7 +166,7 @@ public class R66ClientGui {
             	}
             }
         });
-        frmRClientGui.setTitle("R66 Client Gui");
+        frmRClientGui.setTitle("R66 Client Gui: "+Configuration.configuration.HOST_ID);
         frmRClientGui.setBounds(100, 100, 724, 546);
         if (extended) {
             frmRClientGui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
