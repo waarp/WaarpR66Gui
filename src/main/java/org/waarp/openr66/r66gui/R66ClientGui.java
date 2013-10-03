@@ -61,6 +61,7 @@ import org.waarp.common.logging.WaarpInternalLogger;
 import org.waarp.common.logging.WaarpInternalLoggerFactory;
 import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
 import org.waarp.openr66.protocol.configuration.Configuration;
+import org.waarp.openr66.protocol.configuration.Messages;
 
 import com.swtdesigner.FocusTraversalOnArray;
 
@@ -177,10 +178,10 @@ public class R66ClientGui {
         JMenuBar menuBar = new JMenuBar();
         frmRClientGui.setJMenuBar(menuBar);
         
-        menu = new JMenu("Menu");
+        menu = new JMenu(Messages.getString("R66ClientGui.1")); //$NON-NLS-1$
         menuBar.add(menu);
         
-        JMenuItem menuItemExit = new JMenuItem("Exit");
+        JMenuItem menuItemExit = new JMenuItem(Messages.getString("R66ClientGui.2")); //$NON-NLS-1$
         menuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	if (extended) {
@@ -196,7 +197,7 @@ public class R66ClientGui {
         JSeparator separator = new JSeparator();
         menu.add(separator);
         
-        JMenuItem menuItemHelp = new JMenuItem("Help");
+        JMenuItem menuItemHelp = new JMenuItem(Messages.getString("R66ClientGui.3")); //$NON-NLS-1$
         menuItemHelp.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 environnement.about();
@@ -211,8 +212,8 @@ public class R66ClientGui {
         gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
         frmRClientGui.getContentPane().setLayout(gridBagLayout);
         
-        buttonCheckConnection = new JButton("Check Connection");
-        buttonCheckConnection.setToolTipText("Check the connectivity with the selected Host by sending a simple message");
+        buttonCheckConnection = new JButton(Messages.getString("R66ClientGui.4")); //$NON-NLS-1$
+        buttonCheckConnection.setToolTipText(Messages.getString("R66ClientGui.5")); //$NON-NLS-1$
         buttonCheckConnection.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 R66ClientGuiActions action = new R66ClientGuiActions(R66ClientGuiActions.CHECKCONNECTION);
@@ -225,7 +226,7 @@ public class R66ClientGui {
         gbc_buttonCheckConnection.gridy = 0;
         frmRClientGui.getContentPane().add(buttonCheckConnection, gbc_buttonCheckConnection);
         
-        JLabel label = new JLabel("Host Id");
+        JLabel label = new JLabel(Messages.getString("R66ClientGui.6")); //$NON-NLS-1$
         GridBagConstraints gbc_label = new GridBagConstraints();
         gbc_label.insets = new Insets(0, 0, 5, 5);
         gbc_label.gridx = 2;
@@ -240,7 +241,7 @@ public class R66ClientGui {
             }
         });
         label.setLabelFor(comboBoxHosts);
-        comboBoxHosts.setToolTipText("Select a host on which you want to test the connectivity or send a request of transfer");
+        comboBoxHosts.setToolTipText(Messages.getString("R66ClientGui.7")); //$NON-NLS-1$
         GridBagConstraints gbc_comboBoxHosts = new GridBagConstraints();
         gbc_comboBoxHosts.fill = GridBagConstraints.HORIZONTAL;
         gbc_comboBoxHosts.insets = new Insets(0, 0, 5, 5);
@@ -248,7 +249,7 @@ public class R66ClientGui {
         gbc_comboBoxHosts.gridy = 0;
         frmRClientGui.getContentPane().add(comboBoxHosts, gbc_comboBoxHosts);
         
-        JLabel label_1 = new JLabel("Rule");
+        JLabel label_1 = new JLabel(Messages.getString("R66ClientGui.8")); //$NON-NLS-1$
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.insets = new Insets(0, 0, 5, 5);
         gbc_label_1.gridx = 2;
@@ -263,7 +264,7 @@ public class R66ClientGui {
             }
         });
         label_1.setLabelFor(comboBoxRules);
-        comboBoxRules.setToolTipText("Select a Rule to use in case if a request of transfer");
+        comboBoxRules.setToolTipText(Messages.getString("R66ClientGui.9")); //$NON-NLS-1$
         GridBagConstraints gbc_comboBoxRules = new GridBagConstraints();
         gbc_comboBoxRules.fill = GridBagConstraints.HORIZONTAL;
         gbc_comboBoxRules.insets = new Insets(0, 0, 5, 5);
@@ -271,15 +272,15 @@ public class R66ClientGui {
         gbc_comboBoxRules.gridy = 1;
         frmRClientGui.getContentPane().add(comboBoxRules, gbc_comboBoxRules);
         
-        checkBoxMD5 = new JCheckBox("Digest");
-        checkBoxMD5.setToolTipText("Checked if you want that all packets are checked using a Digest (optional and not recommended if already using SSL)");
+        checkBoxMD5 = new JCheckBox(Messages.getString("R66ClientGui.10")); //$NON-NLS-1$
+        checkBoxMD5.setToolTipText(Messages.getString("R66ClientGui.11")); //$NON-NLS-1$
         GridBagConstraints gbc_checkBoxMD5 = new GridBagConstraints();
         gbc_checkBoxMD5.insets = new Insets(0, 0, 5, 0);
         gbc_checkBoxMD5.gridx = 4;
         gbc_checkBoxMD5.gridy = 1;
         frmRClientGui.getContentPane().add(checkBoxMD5, gbc_checkBoxMD5);
         
-        JLabel label_2 = new JLabel("Information");
+        JLabel label_2 = new JLabel(Messages.getString("R66ClientGui.0")); //$NON-NLS-1$
         GridBagConstraints gbc_label_2 = new GridBagConstraints();
         gbc_label_2.insets = new Insets(0, 0, 5, 5);
         gbc_label_2.gridx = 2;
@@ -288,7 +289,7 @@ public class R66ClientGui {
         
         textFieldInformation = new JTextField();
         label_2.setLabelFor(textFieldInformation);
-        textFieldInformation.setToolTipText("Information to provide in the field info of the request to the remote host");
+        textFieldInformation.setToolTipText(Messages.getString("R66ClientGui.13")); //$NON-NLS-1$
         GridBagConstraints gbc_textFieldInformation = new GridBagConstraints();
         gbc_textFieldInformation.weightx = 1.0;
         gbc_textFieldInformation.fill = GridBagConstraints.HORIZONTAL;
@@ -299,7 +300,7 @@ public class R66ClientGui {
         frmRClientGui.getContentPane().add(textFieldInformation, gbc_textFieldInformation);
         textFieldInformation.setColumns(10);
         
-        JLabel label_3 = new JLabel("File");
+        JLabel label_3 = new JLabel(Messages.getString("R66ClientGui.14")); //$NON-NLS-1$
         GridBagConstraints gbc_label_3 = new GridBagConstraints();
         gbc_label_3.insets = new Insets(0, 0, 5, 5);
         gbc_label_3.gridx = 2;
@@ -314,7 +315,7 @@ public class R66ClientGui {
             }
         });
         label_3.setLabelFor(textFieldFile);
-        textFieldFile.setToolTipText("File reference to send or receive. It might be a full path or a relative path. Note that \" \" might be necessary if blank characters occur.");
+        textFieldFile.setToolTipText(Messages.getString("R66ClientGui.15")); //$NON-NLS-1$
         GridBagConstraints gbc_textFieldFile = new GridBagConstraints();
         gbc_textFieldFile.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldFile.insets = new Insets(0, 0, 5, 5);
@@ -323,8 +324,8 @@ public class R66ClientGui {
         frmRClientGui.getContentPane().add(textFieldFile, gbc_textFieldFile);
         textFieldFile.setColumns(10);
         
-        buttonFileFind = new JButton("File Find");
-        buttonFileFind.setToolTipText("Helper to find a local file to send");
+        buttonFileFind = new JButton(Messages.getString("R66ClientGui.16")); //$NON-NLS-1$
+        buttonFileFind.setToolTipText(Messages.getString("R66ClientGui.17")); //$NON-NLS-1$
         buttonFileFind.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 R66ClientGuiActions action = new R66ClientGuiActions(R66ClientGuiActions.FILESELECT);
@@ -337,8 +338,8 @@ public class R66ClientGui {
         gbc_buttonFileFind.gridy = 3;
         frmRClientGui.getContentPane().add(buttonFileFind, gbc_buttonFileFind);
         
-        buttonTransferStart = new JButton("Starts Transfer");
-        buttonTransferStart.setToolTipText("Starts the request of transfer according to the above options");
+        buttonTransferStart = new JButton(Messages.getString("R66ClientGui.18")); //$NON-NLS-1$
+        buttonTransferStart.setToolTipText(Messages.getString("R66ClientGui.19")); //$NON-NLS-1$
         buttonTransferStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 R66ClientGuiActions action = new R66ClientGuiActions(R66ClientGuiActions.STARTTRANSFER);
@@ -351,7 +352,7 @@ public class R66ClientGui {
         gbc_buttonTransferStart.gridy = 4;
         frmRClientGui.getContentPane().add(buttonTransferStart, gbc_buttonTransferStart);
         
-        checkBoxDebug = new JCheckBox("Debug");
+        checkBoxDebug = new JCheckBox(Messages.getString("R66ClientGui.20")); //$NON-NLS-1$
         checkBoxDebug.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 environnement.debug(checkBoxDebug.isSelected());
@@ -388,11 +389,11 @@ public class R66ClientGui {
         frmRClientGui.getContentPane().add(scrollPane_1, gbc_scrollPane_1);
         
         textFieldStatus = new JEditorPane();
-        textFieldStatus.setToolTipText("Result of last command");
+        textFieldStatus.setToolTipText(Messages.getString("R66ClientGui.21")); //$NON-NLS-1$
         scrollPane_1.setViewportView(textFieldStatus);
         textFieldStatus.setForeground(Color.GRAY);
         textFieldStatus.setBackground(new Color(255, 255, 153));
-        textFieldStatus.setContentType("text/html");
+        textFieldStatus.setContentType(Messages.getString("R66ClientGui.22")); //$NON-NLS-1$
         textFieldStatus.setEditable(false);
         
         scrollPane = new JScrollPane();
@@ -408,7 +409,7 @@ public class R66ClientGui {
         
         textPaneLog = new JTextArea();
         scrollPane.setViewportView(textPaneLog);
-        textPaneLog.setToolTipText("Output of internal commands of R66");
+        textPaneLog.setToolTipText(Messages.getString("R66ClientGui.23")); //$NON-NLS-1$
         textPaneLog.setEditable(false);
         
         System.setOut(new PrintStream(new JTextAreaOutputStream(textPaneLog)));
@@ -445,7 +446,7 @@ public class R66ClientGui {
                     findFile();
                     break;
                 default:
-                    environnement.GuiResultat = "Action not recognized";
+                    environnement.GuiResultat = Messages.getString("R66ClientGui.24"); //$NON-NLS-1$
             }
             setStatus(environnement.GuiResultat);
             if (method != FILESELECT) {
@@ -498,8 +499,8 @@ public class R66ClientGui {
         disableAllButtons();
         environnement.hostId = (String) comboBoxHosts.getSelectedItem();
         if (environnement.hostId == null || environnement.hostId.trim().isEmpty()) {
-            environnement.hostId = "NO HOST";
-            environnement.GuiResultat = "No Host specified!";
+            environnement.hostId = Messages.getString("R66ClientGui.26"); //$NON-NLS-1$
+            environnement.GuiResultat = Messages.getString("R66ClientGui.27"); //$NON-NLS-1$
         } else {
             environnement.hostId = environnement.hostId.trim();
             environnement.checkConnection();
@@ -519,13 +520,13 @@ public class R66ClientGui {
         
         boolean ok = true;
         if (environnement.hostId == null || environnement.hostId.trim().isEmpty()) {
-            environnement.hostId = "NO HOST";
+            environnement.hostId = Messages.getString("R66ClientGui.26"); //$NON-NLS-1$
             ok = false;
         } else {
             environnement.hostId = environnement.hostId.trim();
         }
         if (environnement.filePath == null || environnement.filePath.trim().isEmpty()) {
-            environnement.filePath = "NO FILE";
+            environnement.filePath = Messages.getString("R66ClientGui.30"); //$NON-NLS-1$
             ok = false;
         } else {
             environnement.filePath = environnement.filePath.trim();
@@ -536,7 +537,7 @@ public class R66ClientGui {
             environnement.information = environnement.information.trim();
         }
         if (environnement.ruleId == null || environnement.ruleId.trim().isEmpty()) {
-            environnement.ruleId = "NO RULE";
+            environnement.ruleId = Messages.getString("R66ClientGui.32"); //$NON-NLS-1$
             ok = false;
         } else {
             environnement.ruleId = environnement.ruleId.trim();
@@ -545,9 +546,9 @@ public class R66ClientGui {
         	logger.debug("start startTransfer: "+environnement.toString());
             environnement.startsTransfer(progressBarTransfer, textFieldStatus);
         } else {
-            environnement.GuiResultat = "<html>Not enough arg to start the transfer:<br>   "+
-                "HostId: "+environnement.hostId+" Rule: "+environnement.ruleId+
-                " File: "+environnement.filePath;
+            environnement.GuiResultat = Messages.getString("R66ClientGui.34")+ //$NON-NLS-1$
+                Messages.getString("R66ClientGui.35")+environnement.hostId+Messages.getString("R66ClientGui.36")+environnement.ruleId+ //$NON-NLS-1$ //$NON-NLS-2$
+                Messages.getString("R66ClientGui.37")+environnement.filePath; //$NON-NLS-1$
         }
         setStatus(environnement.GuiResultat);
         showDialog();
@@ -565,7 +566,7 @@ public class R66ClientGui {
 				} catch (IOException e) {
 				}
                 setFindFile();
-                environnement.GuiResultat = "New file sets";
+                environnement.GuiResultat = Messages.getString("R66ClientGui.38"); //$NON-NLS-1$
             }
         } finally {
             enableAllButtons();

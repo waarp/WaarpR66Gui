@@ -42,6 +42,7 @@ import org.waarp.openr66.database.DbConstant;
 import org.waarp.openr66.database.data.DbHostAuth;
 import org.waarp.openr66.database.data.DbRule;
 import org.waarp.openr66.protocol.configuration.Configuration;
+import org.waarp.openr66.protocol.configuration.Messages;
 import org.waarp.openr66.protocol.localhandler.packet.TestPacket;
 import org.waarp.openr66.protocol.localhandler.packet.ValidPacket;
 import org.waarp.openr66.protocol.networkhandler.NetworkTransaction;
@@ -82,13 +83,13 @@ public class R66Environment {
         InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
         initLog();
         if (args.length < 1) {
-            System.err.println("Need client with no database support configuration file as argument");
+            System.err.println(Messages.getString("Transfer.WrongInit")); //$NON-NLS-1$
             System.exit(2);
         }
         if (! FileBasedConfiguration
                 .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
-                    .error("Needs a correct configuration file as first argument");
+                    .error(Messages.getString("Transfer.WrongInit")); //$NON-NLS-1$
             if (DbConstant.admin != null && DbConstant.admin.isConnected) {
                 DbConstant.admin.close();
             }
@@ -125,10 +126,10 @@ public class R66Environment {
         if (result.isSuccess()) {
             R66Result r66result = result.getResult();
             ValidPacket info = (ValidPacket) r66result.other;
-            GuiResultat = "<html>Test Message    SUCCESS<br>    " +
+            GuiResultat = Messages.getString("R66Environment.2") + //$NON-NLS-1$
                     info.getSheader();
         } else {
-            GuiResultat = "<html>Test Message    FAILURE<br>    " +
+            GuiResultat = Messages.getString("R66Environment.3") + //$NON-NLS-1$
                     result.getResult().toString();
         }
         return result.isSuccess();
@@ -153,37 +154,37 @@ public class R66Environment {
         R66Result result = future.getResult();
         if (future.isSuccess()) {
             if (result.runner.getErrorInfo() == ErrorCode.Warning) {
-                GuiResultat = "<html>WARNED<br>    " +
+                GuiResultat = Messages.getString("R66Environment.8") + //$NON-NLS-1$
                         result.runner.toShortNoHtmlString("<br>") +
-                        "<br>    REMOTE: " +
+                        Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId +
                         (result.file != null? result.file.toString() +
-                                "" : "no file") + "    delay: " +
+                                "" : Messages.getString("R66Environment.12")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                         delay;
             } else {
-                GuiResultat = "<html>SUCCESS<br>    " +
+                GuiResultat = Messages.getString("R66Environment.14") + //$NON-NLS-1$
                     result.runner.toShortNoHtmlString("<br>") +
-                    "<br>    REMOTE: " +
+                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
                     hostId +
                     (result.file != null? result.file.toString() +
-                            "" : "no file") + "    delay: " +
+                            "" : Messages.getString("R66Environment.12")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                     delay;
             }
         } else {
             if (result == null || result.runner == null) {
-                GuiResultat = "<html>Transfer in FAILURE with no Id"+
-                    "<br>    REMOTE: " +
+                GuiResultat = Messages.getString("R66Environment.20")+ //$NON-NLS-1$
+                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
                     hostId + "     "+ future
                         .getCause().getMessage();
             } else if (result.runner.getErrorInfo() == ErrorCode.Warning) {
-                GuiResultat = "<html>Transfer is WARNED<br>    " +
+                GuiResultat = Messages.getString("R66Environment.23") + //$NON-NLS-1$
                     result.runner.toShortNoHtmlString("<br>") +
-                    "<br>    REMOTE: " +
+                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
                     hostId +"    "+ future.getCause().getMessage();
             } else {
-                GuiResultat = "<html>Transfer in FAILURE<br>    " +
+                GuiResultat = Messages.getString("R66Environment.27") + //$NON-NLS-1$
                     result.runner.toShortNoHtmlString("<br>")+
-                    "<br>    REMOTE: " +
+                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
                     hostId +"    "+ future.getCause().getMessage();
             }
         }
@@ -197,16 +198,16 @@ public class R66Environment {
             dbHostAuths = DbHostAuth.getAllHosts(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
-            results[0] = "NoHostFound";
+            results[0] = Messages.getString("R66Environment.31"); //$NON-NLS-1$
             return results;
         } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
-            results[0] = "NoHostFound";
+            results[0] = Messages.getString("R66Environment.31"); //$NON-NLS-1$
             return results;
         }
         if (dbHostAuths.length == 0) {
             results = new String[1];
-            results[0] = "NoHostFound";
+            results[0] = Messages.getString("R66Environment.31"); //$NON-NLS-1$
             return results;
         }
         results = new String[dbHostAuths.length];
@@ -223,16 +224,16 @@ public class R66Environment {
             dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         }
         if (dbRules.length == 0) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         }
         results = new String[dbRules.length];
@@ -249,11 +250,11 @@ public class R66Environment {
             dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         }
         int len = 0;
@@ -266,7 +267,7 @@ public class R66Environment {
         }
         if (len == 0) {
             results = new String[1];
-            results[0] = "NoRuleFound";
+            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
         }
         results = new String[len];
