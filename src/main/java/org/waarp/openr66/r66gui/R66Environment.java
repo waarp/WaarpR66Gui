@@ -83,13 +83,13 @@ public class R66Environment {
         InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
         initLog();
         if (args.length < 1) {
-            System.err.println(Messages.getString("Transfer.WrongInit")); //$NON-NLS-1$
+            System.err.println(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
             System.exit(2);
         }
         if (! FileBasedConfiguration
                 .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
-                    .error(Messages.getString("Transfer.WrongInit")); //$NON-NLS-1$
+                    .error(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
             if (DbConstant.admin != null && DbConstant.admin.isConnected) {
                 DbConstant.admin.close();
             }
@@ -159,7 +159,7 @@ public class R66Environment {
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId +
                         (result.file != null? result.file.toString() +
-                                "" : Messages.getString("R66Environment.12")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                                "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                         delay;
             } else {
                 GuiResultat = Messages.getString("R66Environment.14") + //$NON-NLS-1$
@@ -167,7 +167,7 @@ public class R66Environment {
                     Messages.getString("R66Environment.10") + //$NON-NLS-1$
                     hostId +
                     (result.file != null? result.file.toString() +
-                            "" : Messages.getString("R66Environment.12")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                            "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                     delay;
             }
         } else {
