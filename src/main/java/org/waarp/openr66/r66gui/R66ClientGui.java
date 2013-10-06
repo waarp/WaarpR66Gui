@@ -393,7 +393,7 @@ public class R66ClientGui {
         scrollPane_1.setViewportView(textFieldStatus);
         textFieldStatus.setForeground(Color.GRAY);
         textFieldStatus.setBackground(new Color(255, 255, 153));
-        textFieldStatus.setContentType(Messages.getString("R66ClientGui.22")); //$NON-NLS-1$
+        textFieldStatus.setContentType("text/html");
         textFieldStatus.setEditable(false);
         
         scrollPane = new JScrollPane();
