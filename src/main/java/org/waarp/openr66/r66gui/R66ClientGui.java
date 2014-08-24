@@ -56,9 +56,9 @@ import javax.swing.SwingWorker;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import org.jboss.netty.logging.InternalLoggerFactory;
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import io.netty.logging.WaarpLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
 import org.waarp.openr66.protocol.configuration.Configuration;
 import org.waarp.openr66.protocol.configuration.Messages;
@@ -76,7 +76,7 @@ public class R66ClientGui {
 	/**
 	 * Internal Logger
 	 */
-	private static WaarpInternalLogger logger = null;
+	private static WaarpLogger logger = null;
 
     public static String []static_args;
     public static R66ClientGui window;
@@ -105,9 +105,9 @@ public class R66ClientGui {
      * Launch the application.
      */
     public static void main(String[] args) {
-    	InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
+    	WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
 		if (logger == null) {
-			logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+			logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
 		}
         static_args = args;
         EventQueue.invokeLater(new Runnable() {
@@ -127,7 +127,7 @@ public class R66ClientGui {
      */
     protected R66ClientGui() {
     	if (logger == null) {
-    		logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+    		logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
     		environnement.initLog();
     	}
     }
@@ -141,7 +141,7 @@ public class R66ClientGui {
      */
     public R66ClientGui(String []args) {
     	if (logger == null) {
-    		logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+    		logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
     		environnement.initLog();
     	}
         environnement.initialize(args);

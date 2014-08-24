@@ -71,13 +71,13 @@ public class FocusTraversalOnArray extends FocusTraversalPolicy {
 	public Component getComponentBefore(Container container, Component component) {
 		return cycle(component, -1);
 	}
-	public Component getFirstComponent(Container container) {
+	public Component firstComponent(Container container) {
 		return m_Components[0];
 	}
 	public Component getLastComponent(Container container) {
 		return m_Components[m_Components.length - 1];
 	}
 	public Component getDefaultComponent(Container container) {
-		return getFirstComponent(container);
+		return firstComponent(container);
 	}
 }

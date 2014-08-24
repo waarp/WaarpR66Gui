@@ -25,14 +25,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
 
 
-import org.jboss.netty.logging.InternalLoggerFactory;
+import io.netty.logging.WaarpLoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.waarp.common.database.DbSession;
 import org.waarp.common.database.exception.WaarpDatabaseException;
 import org.waarp.common.database.exception.WaarpDatabaseNoConnectionException;
 import org.waarp.common.database.exception.WaarpDatabaseSqlException;
-import org.waarp.common.logging.WaarpInternalLogger;
-import org.waarp.common.logging.WaarpInternalLoggerFactory;
+import org.waarp.common.logging.WaarpLogger;
+import org.waarp.common.logging.WaarpLoggerFactory;
 import org.waarp.common.logging.WaarpSlf4JLoggerFactory;
 import org.waarp.openr66.client.Message;
 import org.waarp.openr66.configuration.FileBasedConfiguration;
@@ -60,7 +60,7 @@ public class R66Environment {
     /**
      * Internal Logger
      */
-    static protected volatile WaarpInternalLogger logger;
+    static protected volatile WaarpLogger logger;
 
 
     public String ruleId = null;
@@ -75,12 +75,12 @@ public class R66Environment {
     
     public void initLog() {
     	if (logger == null) {
-            logger = WaarpInternalLoggerFactory.getLogger(R66ClientGui.class);
+            logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
         }
     }
     
     public void initialize(String []args) {
-        InternalLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
+        WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
         initLog();
         if (args.length < 1) {
             System.err.println(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
@@ -90,7 +90,7 @@ public class R66Environment {
                 .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
                     .error(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
-            if (DbConstant.admin != null && DbConstant.admin.isConnected) {
+            if (DbConstant.admin != null && DbConstant.admin.isActive) {
                 DbConstant.admin.close();
             }
             ChannelUtils.stopLogger();
