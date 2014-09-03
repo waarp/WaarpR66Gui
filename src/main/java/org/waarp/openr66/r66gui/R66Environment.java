@@ -25,7 +25,6 @@ import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
 
 
-import io.netty.logging.WaarpLoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.waarp.common.database.DbSession;
 import org.waarp.common.database.exception.WaarpDatabaseException;
