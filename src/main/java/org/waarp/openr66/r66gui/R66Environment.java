@@ -20,10 +20,8 @@
  */
 package org.waarp.openr66.r66gui;
 
-
 import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
-
 
 import org.slf4j.LoggerFactory;
 import org.waarp.common.database.DbSession;
@@ -61,7 +59,6 @@ public class R66Environment {
      */
     static protected volatile WaarpLogger logger;
 
-
     public String ruleId = null;
     public String hostId = null;
     public String information = null;
@@ -71,21 +68,21 @@ public class R66Environment {
     public boolean isClientSending = false;
     public NetworkTransaction networkTransaction = null;
     public String GuiResultat;
-    
+
     public void initLog() {
-    	if (logger == null) {
+        if (logger == null) {
             logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
         }
     }
-    
-    public void initialize(String []args) {
+
+    public void initialize(String[] args) {
         WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
         initLog();
         if (args.length < 1) {
             System.err.println(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
             System.exit(2);
         }
-        if (! FileBasedConfiguration
+        if (!FileBasedConfiguration
                 .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
                     .error(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
@@ -98,7 +95,7 @@ public class R66Environment {
         Configuration.configuration.pipelineInit();
         networkTransaction = new NetworkTransaction();
     }
-    
+
     public void exit() {
         if (networkTransaction != null) {
             networkTransaction.closeAll();
@@ -115,6 +112,7 @@ public class R66Environment {
             logger.setLevel(Level.WARN);
         }
     }
+
     public boolean checkConnection() {
         R66Future result = new R66Future(true);
         TestPacket packet = new TestPacket("MSG", "TestConnection", 100);
@@ -135,14 +133,14 @@ public class R66Environment {
     }
 
     public boolean startsTransfer(JProgressBar progressBar, JEditorPane textFieldStatus) {
-    	logger.debug("start startTransfer2");
+        logger.debug("start startTransfer2");
         long time1 = System.currentTimeMillis();
         R66Future future = new R66Future(true);
         ProgressDirectTransfer transaction = new ProgressDirectTransfer(future, hostId,
-                filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE, 
+                filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE,
                 DbConstant.ILLEGALVALUE, networkTransaction, 500,
                 progressBar, textFieldStatus);
-        logger.info("Launch transfer: "+hostId+":"+ruleId+":"+filePath);
+        logger.info("Launch transfer: " + hostId + ":" + ruleId + ":" + filePath);
         transaction.run();
         future.awaitUninterruptibly();
         progressBar.setIndeterminate(true);
@@ -154,43 +152,46 @@ public class R66Environment {
         if (future.isSuccess()) {
             if (result.runner.getErrorInfo() == ErrorCode.Warning) {
                 GuiResultat = Messages.getString("R66Environment.8") + //$NON-NLS-1$
-                        result.runner.toShortNoHtmlString("<br>") +
+                        result.runner.toShortNoHtmlString("<br>")
+                        +
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
-                        hostId +
-                        (result.file != null? result.file.toString() +
-                                "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                        hostId
+                        +
+                        (result.file != null ? result.file.toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                         delay;
             } else {
                 GuiResultat = Messages.getString("R66Environment.14") + //$NON-NLS-1$
-                    result.runner.toShortNoHtmlString("<br>") +
-                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
-                    hostId +
-                    (result.file != null? result.file.toString() +
-                            "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
-                    delay;
+                        result.runner.toShortNoHtmlString("<br>")
+                        +
+                        Messages.getString("R66Environment.10") + //$NON-NLS-1$
+                        hostId
+                        +
+                        (result.file != null ? result.file.toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                        delay;
             }
         } else {
             if (result == null || result.runner == null) {
-                GuiResultat = Messages.getString("R66Environment.20")+ //$NON-NLS-1$
-                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
-                    hostId + "     "+ future
-                        .getCause().getMessage();
+                GuiResultat = Messages.getString("R66Environment.20") + //$NON-NLS-1$
+                        Messages.getString("R66Environment.10") + //$NON-NLS-1$
+                        hostId + "     " + future
+                                .getCause().getMessage();
             } else if (result.runner.getErrorInfo() == ErrorCode.Warning) {
                 GuiResultat = Messages.getString("R66Environment.23") + //$NON-NLS-1$
-                    result.runner.toShortNoHtmlString("<br>") +
-                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
-                    hostId +"    "+ future.getCause().getMessage();
+                        result.runner.toShortNoHtmlString("<br>") +
+                        Messages.getString("R66Environment.10") + //$NON-NLS-1$
+                        hostId + "    " + future.getCause().getMessage();
             } else {
                 GuiResultat = Messages.getString("R66Environment.27") + //$NON-NLS-1$
-                    result.runner.toShortNoHtmlString("<br>")+
-                    Messages.getString("R66Environment.10") + //$NON-NLS-1$
-                    hostId +"    "+ future.getCause().getMessage();
+                        result.runner.toShortNoHtmlString("<br>") +
+                        Messages.getString("R66Environment.10") + //$NON-NLS-1$
+                        hostId + "    " + future.getCause().getMessage();
             }
         }
         return future.isSuccess();
     }
-    public static String [] getHostIds() {
-        String []results = null;
+
+    public static String[] getHostIds() {
+        String[] results = null;
         DbHostAuth[] dbHostAuths;
         DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
@@ -215,8 +216,9 @@ public class R66Environment {
         }
         return results;
     }
-    public static String [] getRules() {
-        String []results = null;
+
+    public static String[] getRules() {
+        String[] results = null;
         DbRule[] dbRules;
         DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
@@ -241,8 +243,9 @@ public class R66Environment {
         }
         return results;
     }
-    public static String [] getRules(boolean sendMode) {
-        String []results = null;
+
+    public static String[] getRules(boolean sendMode) {
+        String[] results = null;
         DbRule[] dbRules;
         DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
         try {
@@ -258,11 +261,13 @@ public class R66Environment {
         }
         int len = 0;
         for (DbRule rule : dbRules) {
-        	if (sendMode) {
-        		if (rule.isSendMode()) len++;
-        	} else {
-        		if (rule.isRecvMode()) len++;
-        	}
+            if (sendMode) {
+                if (rule.isSendMode())
+                    len++;
+            } else {
+                if (rule.isRecvMode())
+                    len++;
+            }
         }
         if (len == 0) {
             results = new String[1];
@@ -272,17 +277,17 @@ public class R66Environment {
         results = new String[len];
         int i = 0;
         for (DbRule rule : dbRules) {
-        	if (sendMode) {
-        		if (rule.isSendMode()) {
+            if (sendMode) {
+                if (rule.isSendMode()) {
                     results[i] = rule.idRule;
                     i++;
-        		}
-        	} else {
-        		if (rule.isRecvMode()) {
+                }
+            } else {
+                if (rule.isRecvMode()) {
                     results[i] = rule.idRule;
                     i++;
-        		}
-        	}
+                }
+            }
         }
         return results;
     }
@@ -295,22 +300,34 @@ public class R66Environment {
         } catch (WaarpDatabaseException e) {
         }
         if (host != null) {
-            String hosthtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>" +
-            		"<tr><td width=13% align=center><b>Host ID</b></td><td width=13% align=center><b>Address</b></td>" +
-            		"<td width=13% align=center><b>Port</b></td><td width=5% align=center><b>SSL</b></td>" +
-            		"<td width=13% align=center><b>HostKey</b></td><td width=5% align=center><b>Admin Role</b></td>" +
-            		"<td width=5% align=center><b>IsClient</b></td></tr>" +
-            		"<tr><td width=13% align=center>XXXHOSTXXX</td>"+
-                "<td width=13% align=center>XXXADDRXXX</td>"+
-                "<td width=13% align=center>XXXPORTXXX</td>"+
-                "<td width=5% align=center><input type=checkbox name=ssl value=on XXXSSLXXX disabled readonly></td>"+
-                "<td width=13% align=center>XXXKEYXXX</td>"+
-                "<td width=5% align=center><input type=checkbox name=admin value=on XXXADMXXX disabled readonly></td>"+
-                "<td width=5% align=center><input type=checkbox name=isclient value=on XXXISCXXX disabled readonly></td></tr></table>";
+            String hosthtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>"
+                    +
+                    "<tr><td width=13% align=center><b>Host ID</b></td><td width=13% align=center><b>Address</b></td>"
+                    +
+                    "<td width=13% align=center><b>Port</b></td><td width=5% align=center><b>SSL</b></td>"
+                    +
+                    "<td width=13% align=center><b>HostKey</b></td><td width=5% align=center><b>Admin Role</b></td>"
+                    +
+                    "<td width=5% align=center><b>IsClient</b></td></tr>"
+                    +
+                    "<tr><td width=13% align=center>XXXHOSTXXX</td>"
+                    +
+                    "<td width=13% align=center>XXXADDRXXX</td>"
+                    +
+                    "<td width=13% align=center>XXXPORTXXX</td>"
+                    +
+                    "<td width=5% align=center><input type=checkbox name=ssl value=on XXXSSLXXX disabled readonly></td>"
+                    +
+                    "<td width=13% align=center>XXXKEYXXX</td>"
+                    +
+                    "<td width=5% align=center><input type=checkbox name=admin value=on XXXADMXXX disabled readonly></td>"
+                    +
+                    "<td width=5% align=center><input type=checkbox name=isclient value=on XXXISCXXX disabled readonly></td></tr></table>";
             return host.toSpecializedHtml(null, hosthtml, true);
         }
-        return "HostId: "+id;
+        return "HostId: " + id;
     }
+
     public static String getRule(String id) {
         DbRule rule = null;
         DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
@@ -319,50 +336,60 @@ public class R66Environment {
         } catch (WaarpDatabaseException e) {
         }
         if (rule != null) {
-            String rulehtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>" +
-                        "<tr><td width=6% align=center><b>Rule Id</b></td><td width=6% align=center><b>Mode</b></td>" +
-            		"<td width=6% align=center><b>Host Ids</b></td><td width=6% align=center><b>RecvPath</b></td>" +
-            		"<td width=6% align=center><b>SendPath</b></td><td width=7% align=center><b>ArchivePath</b></td>" +
-            		"<td width=7% align=center><b>WorkPath</b></td></tr><tr>" +
-            		"<td width=6% align=center>XXXRULEXXX</td>" +
-            		"<td width=6% align=center><input type=radio value=send name=mode XXXSENDXXX disabled>SEND" +
-            		"<input type=radio name=mode value=recv XXXRECVXXX disabled readonly>RECV<br>" +
-            		"<input type=radio name=mode value=sendmd5 XXXSENDMXXX disabled readonly>SENDMD5" +
-            		"<input type=radio name=mode value=recvmd5 XXXRECVMXXX disabled readonly>RECVMD5<br>" +
-            		"<input type=radio value=sendth name=mode XXXSENDTXXX disabled readonly>SENDTHROUGH<br>" +
-            		"<input type=radio name=mode value=recvth XXXRECVTXXX disabled readonly>RECVTHROUGH<br>" +
-            		"<input type=radio name=mode value=sendthmd5 XXXSENDMTXXX disabled readonly>SENDMD5THROUGH<br>" +
-            		"<input type=radio name=mode value=recvthmd5 XXXRECVMTXXX disabled readonly>RECVMD5THROUGH</td>" +
-            		"<td width=6% align=center><PRE>XXXIDSXXX</PRE></td>" +
-            		"<td width=6% align=center><PRE>XXXRPXXX</PRE></td>" +
-            		"<td width=6% align=center><PRE>XXXSPXXX</PRE></td>" +
-            		"<td width=7% align=center><PRE>XXXAPXXX</PRE></td>" +
-            		"<td width=7% align=center><PRE>XXXWPXXX</PRE></td></tr><tr>" +
-            		"<td width=7% align=center><b>Recv Pre</b></td><td width=7% align=center><b>Recv Post</b></td>" +
-            		"<td width=7% align=center><b>Recv Error</b></td><td width=7% align=center><b>Send Pre</b></td>" +
-            		"<td width=7% align=center><b>Send Post</b></td><td width=7% align=center><b>Send Error</b></td>" +
-            		"<td width=8%>&nbsp;</td></tr><tr>" +
-            		"<td width=7%><PRE>XXXRPTXXX</PRE></td>" +
-            		"<td width=7%><PRE>XXXRSTXXX</PRE></td>" +
-            		"<td width=7%><PRE>XXXRETXXX</PRE></td>" +
-            		"<td width=7%><PRE>XXXSPTXXX</PRE></td>" +
-            		"<td width=8%><PRE>XXXSSTXXX</PRE></td>" +
-            		"<td width=8%><PRE>XXXSETXXX</PRE></td>" +
-            		"</tr></table>";
+            String rulehtml = "<table border=1 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100% id=AutoNumber1>"
+                    +
+                    "<tr><td width=6% align=center><b>Rule Id</b></td><td width=6% align=center><b>Mode</b></td>" +
+                    "<td width=6% align=center><b>Host Ids</b></td><td width=6% align=center><b>RecvPath</b></td>" +
+                    "<td width=6% align=center><b>SendPath</b></td><td width=7% align=center><b>ArchivePath</b></td>" +
+                    "<td width=7% align=center><b>WorkPath</b></td></tr><tr>" +
+                    "<td width=6% align=center>XXXRULEXXX</td>" +
+                    "<td width=6% align=center><input type=radio value=send name=mode XXXSENDXXX disabled>SEND" +
+                    "<input type=radio name=mode value=recv XXXRECVXXX disabled readonly>RECV<br>" +
+                    "<input type=radio name=mode value=sendmd5 XXXSENDMXXX disabled readonly>SENDMD5" +
+                    "<input type=radio name=mode value=recvmd5 XXXRECVMXXX disabled readonly>RECVMD5<br>" +
+                    "<input type=radio value=sendth name=mode XXXSENDTXXX disabled readonly>SENDTHROUGH<br>" +
+                    "<input type=radio name=mode value=recvth XXXRECVTXXX disabled readonly>RECVTHROUGH<br>" +
+                    "<input type=radio name=mode value=sendthmd5 XXXSENDMTXXX disabled readonly>SENDMD5THROUGH<br>" +
+                    "<input type=radio name=mode value=recvthmd5 XXXRECVMTXXX disabled readonly>RECVMD5THROUGH</td>" +
+                    "<td width=6% align=center><PRE>XXXIDSXXX</PRE></td>" +
+                    "<td width=6% align=center><PRE>XXXRPXXX</PRE></td>" +
+                    "<td width=6% align=center><PRE>XXXSPXXX</PRE></td>" +
+                    "<td width=7% align=center><PRE>XXXAPXXX</PRE></td>" +
+                    "<td width=7% align=center><PRE>XXXWPXXX</PRE></td></tr><tr>" +
+                    "<td width=7% align=center><b>Recv Pre</b></td><td width=7% align=center><b>Recv Post</b></td>" +
+                    "<td width=7% align=center><b>Recv Error</b></td><td width=7% align=center><b>Send Pre</b></td>" +
+                    "<td width=7% align=center><b>Send Post</b></td><td width=7% align=center><b>Send Error</b></td>" +
+                    "<td width=8%>&nbsp;</td></tr><tr>" +
+                    "<td width=7%><PRE>XXXRPTXXX</PRE></td>" +
+                    "<td width=7%><PRE>XXXRSTXXX</PRE></td>" +
+                    "<td width=7%><PRE>XXXRETXXX</PRE></td>" +
+                    "<td width=7%><PRE>XXXSPTXXX</PRE></td>" +
+                    "<td width=8%><PRE>XXXSSTXXX</PRE></td>" +
+                    "<td width=8%><PRE>XXXSETXXX</PRE></td>" +
+                    "</tr></table>";
             return rule.toSpecializedHtml(null, rulehtml);
         }
-        return "RuleId: "+id;
+        return "RuleId: " + id;
     }
+
     public void about() {
-        GuiResultat = "<HTML><P ALIGN=CENTER><FONT SIZE=5 STYLE=\"font-size: 22pt\"><SPAN>R66 Client GUI Version: "+Version.ID+"</SPAN></FONT></P>"+
-            "<P ALIGN=CENTER><FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>This graphical user interface is intend to provide an easy way to use R66 for:</SPAN></FONT></P>"+
-            "<UL><LI><P ALIGN=LEFT><FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Testing new Rules, Hosts or connectivity</SPAN></FONT></P>"+
-            "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Exchanging files between a PC and a R66 Server</SPAN></FONT></P>"+
-            "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Provide an example on how to use the R66 API in an application</SPAN></FONT></P>"+
-            "</UL>";
+        GuiResultat = "<HTML><P ALIGN=CENTER><FONT SIZE=5 STYLE=\"font-size: 22pt\"><SPAN>R66 Client GUI Version: "
+                + Version.ID
+                + "</SPAN></FONT></P>"
+                +
+                "<P ALIGN=CENTER><FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>This graphical user interface is intend to provide an easy way to use R66 for:</SPAN></FONT></P>"
+                +
+                "<UL><LI><P ALIGN=LEFT><FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Testing new Rules, Hosts or connectivity</SPAN></FONT></P>"
+                +
+                "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Exchanging files between a PC and a R66 Server</SPAN></FONT></P>"
+                +
+                "<LI><P ALIGN=LEFT<FONT SIZE=4 STYLE=\"font-size: 16pt\"><SPAN>Provide an example on how to use the R66 API in an application</SPAN></FONT></P>"
+                +
+                "</UL>";
     }
-    
+
     public String toString() {
-    	return "Env: "+ruleId+":"+hostId+":"+filePath+":"+isMD5+":"+isInRequest+":"+isClientSending+":"+information+":"+GuiResultat;
+        return "Env: " + ruleId + ":" + hostId + ":" + filePath + ":" + isMD5 + ":" + isInRequest + ":"
+                + isClientSending + ":" + information + ":" + GuiResultat;
     }
 }

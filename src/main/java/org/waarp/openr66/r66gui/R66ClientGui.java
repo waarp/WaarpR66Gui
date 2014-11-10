@@ -65,21 +65,21 @@ import org.waarp.openr66.protocol.configuration.Messages;
 import com.swtdesigner.FocusTraversalOnArray;
 
 /**
- * R66 Client GUI to show how to use the API and also to enable to test the connectivity to R66 servers 
+ * R66 Client GUI to show how to use the API and also to enable to test the connectivity to R66 servers
  * and the validity of a transfer through a rule.
  * 
  * @author Frederic Bregier
  *
  */
 public class R66ClientGui {
-	/**
-	 * Internal Logger
-	 */
-	private static WaarpLogger logger = null;
+    /**
+     * Internal Logger
+     */
+    private static WaarpLogger logger = null;
 
-    public static String []static_args;
+    public static String[] static_args;
     public static R66ClientGui window;
-    
+
     public JFrame frmRClientGui;
     private JTextField textFieldInformation;
     private JTextField textFieldFile;
@@ -99,15 +99,15 @@ public class R66ClientGui {
     private JScrollPane scrollPane_1;
     private JCheckBox checkBoxDebug;
     protected boolean extended = false;
-    
+
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-    	WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
-		if (logger == null) {
-			logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
-		}
+        WaarpLoggerFactory.setDefaultFactory(new WaarpSlf4JLoggerFactory(null));
+        if (logger == null) {
+            logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
+        }
         static_args = args;
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -125,24 +125,24 @@ public class R66ClientGui {
      * Used by extended class
      */
     protected R66ClientGui() {
-    	if (logger == null) {
-    		logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
-    		environnement.initLog();
-    	}
+        if (logger == null) {
+            logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
+            environnement.initLog();
+        }
     }
-    
+
     public R66Environment getEnvironment() {
-    	return environnement;
+        return environnement;
     }
-    
+
     /**
      * Create the application.
      */
-    public R66ClientGui(String []args) {
-    	if (logger == null) {
-    		logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
-    		environnement.initLog();
-    	}
+    public R66ClientGui(String[] args) {
+        if (logger == null) {
+            logger = WaarpLoggerFactory.getLogger(R66ClientGui.class);
+            environnement.initLog();
+        }
         environnement.initialize(args);
         initialize();
     }
@@ -151,51 +151,51 @@ public class R66ClientGui {
      * Initialize the contents of the frame.
      */
     protected void initialize() {
-        String [] shosts = R66Environment.getHostIds();
-        String [] srules = R66Environment.getRules();
-        
+        String[] shosts = R66Environment.getHostIds();
+        String[] srules = R66Environment.getRules();
+
         frmRClientGui = new JFrame();
         frmRClientGui.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-            	if (extended) {
-            		frmRClientGui.dispose();
-            	} else {
-            		environnement.exit();
-            		System.exit(0);
-            	}
+                if (extended) {
+                    frmRClientGui.dispose();
+                } else {
+                    environnement.exit();
+                    System.exit(0);
+                }
             }
         });
-        frmRClientGui.setTitle("R66 Client Gui: "+Configuration.configuration.HOST_ID);
+        frmRClientGui.setTitle("R66 Client Gui: " + Configuration.configuration.HOST_ID);
         frmRClientGui.setBounds(100, 100, 724, 546);
         if (extended) {
             frmRClientGui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         } else {
-        	frmRClientGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frmRClientGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
-        
+
         JMenuBar menuBar = new JMenuBar();
         frmRClientGui.setJMenuBar(menuBar);
-        
+
         menu = new JMenu(Messages.getString("R66ClientGui.1")); //$NON-NLS-1$
         menuBar.add(menu);
-        
+
         JMenuItem menuItemExit = new JMenuItem(Messages.getString("R66ClientGui.2")); //$NON-NLS-1$
         menuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	if (extended) {
-            		frmRClientGui.dispose();
-            	} else {
-            		environnement.exit();
-            		System.exit(0);
-            	}
+                if (extended) {
+                    frmRClientGui.dispose();
+                } else {
+                    environnement.exit();
+                    System.exit(0);
+                }
             }
         });
         menu.add(menuItemExit);
-        
+
         JSeparator separator = new JSeparator();
         menu.add(separator);
-        
+
         JMenuItem menuItemHelp = new JMenuItem(Messages.getString("R66ClientGui.3")); //$NON-NLS-1$
         menuItemHelp.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -205,12 +205,12 @@ public class R66ClientGui {
         });
         menu.add(menuItemHelp);
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{24, 130, 80, 369, 99, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 27, 179, 162};
-        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+        gridBagLayout.columnWidths = new int[] { 24, 130, 80, 369, 99, 0 };
+        gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 27, 179, 162 };
+        gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+        gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
         frmRClientGui.getContentPane().setLayout(gridBagLayout);
-        
+
         buttonCheckConnection = new JButton(Messages.getString("R66ClientGui.4")); //$NON-NLS-1$
         buttonCheckConnection.setToolTipText(Messages.getString("R66ClientGui.5")); //$NON-NLS-1$
         buttonCheckConnection.addActionListener(new ActionListener() {
@@ -224,14 +224,14 @@ public class R66ClientGui {
         gbc_buttonCheckConnection.gridx = 1;
         gbc_buttonCheckConnection.gridy = 0;
         frmRClientGui.getContentPane().add(buttonCheckConnection, gbc_buttonCheckConnection);
-        
+
         JLabel label = new JLabel(Messages.getString("R66ClientGui.6")); //$NON-NLS-1$
         GridBagConstraints gbc_label = new GridBagConstraints();
         gbc_label.insets = new Insets(0, 0, 5, 5);
         gbc_label.gridx = 2;
         gbc_label.gridy = 0;
         frmRClientGui.getContentPane().add(label, gbc_label);
-        
+
         comboBoxHosts = new JComboBox(shosts);
         comboBoxHosts.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -247,14 +247,14 @@ public class R66ClientGui {
         gbc_comboBoxHosts.gridx = 3;
         gbc_comboBoxHosts.gridy = 0;
         frmRClientGui.getContentPane().add(comboBoxHosts, gbc_comboBoxHosts);
-        
+
         JLabel label_1 = new JLabel(Messages.getString("R66ClientGui.8")); //$NON-NLS-1$
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.insets = new Insets(0, 0, 5, 5);
         gbc_label_1.gridx = 2;
         gbc_label_1.gridy = 1;
         frmRClientGui.getContentPane().add(label_1, gbc_label_1);
-        
+
         comboBoxRules = new JComboBox(srules);
         comboBoxRules.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -270,7 +270,7 @@ public class R66ClientGui {
         gbc_comboBoxRules.gridx = 3;
         gbc_comboBoxRules.gridy = 1;
         frmRClientGui.getContentPane().add(comboBoxRules, gbc_comboBoxRules);
-        
+
         checkBoxMD5 = new JCheckBox(Messages.getString("R66ClientGui.10")); //$NON-NLS-1$
         checkBoxMD5.setToolTipText(Messages.getString("R66ClientGui.11")); //$NON-NLS-1$
         GridBagConstraints gbc_checkBoxMD5 = new GridBagConstraints();
@@ -278,14 +278,14 @@ public class R66ClientGui {
         gbc_checkBoxMD5.gridx = 4;
         gbc_checkBoxMD5.gridy = 1;
         frmRClientGui.getContentPane().add(checkBoxMD5, gbc_checkBoxMD5);
-        
+
         JLabel label_2 = new JLabel(Messages.getString("R66ClientGui.0")); //$NON-NLS-1$
         GridBagConstraints gbc_label_2 = new GridBagConstraints();
         gbc_label_2.insets = new Insets(0, 0, 5, 5);
         gbc_label_2.gridx = 2;
         gbc_label_2.gridy = 2;
         frmRClientGui.getContentPane().add(label_2, gbc_label_2);
-        
+
         textFieldInformation = new JTextField();
         label_2.setLabelFor(textFieldInformation);
         textFieldInformation.setToolTipText(Messages.getString("R66ClientGui.13")); //$NON-NLS-1$
@@ -298,14 +298,14 @@ public class R66ClientGui {
         gbc_textFieldInformation.gridy = 2;
         frmRClientGui.getContentPane().add(textFieldInformation, gbc_textFieldInformation);
         textFieldInformation.setColumns(10);
-        
+
         JLabel label_3 = new JLabel(Messages.getString("R66ClientGui.14")); //$NON-NLS-1$
         GridBagConstraints gbc_label_3 = new GridBagConstraints();
         gbc_label_3.insets = new Insets(0, 0, 5, 5);
         gbc_label_3.gridx = 2;
         gbc_label_3.gridy = 3;
         frmRClientGui.getContentPane().add(label_3, gbc_label_3);
-        
+
         textFieldFile = new JTextField();
         textFieldFile.addFocusListener(new FocusAdapter() {
             @Override
@@ -322,7 +322,7 @@ public class R66ClientGui {
         gbc_textFieldFile.gridy = 3;
         frmRClientGui.getContentPane().add(textFieldFile, gbc_textFieldFile);
         textFieldFile.setColumns(10);
-        
+
         buttonFileFind = new JButton(Messages.getString("R66ClientGui.16")); //$NON-NLS-1$
         buttonFileFind.setToolTipText(Messages.getString("R66ClientGui.17")); //$NON-NLS-1$
         buttonFileFind.addActionListener(new ActionListener() {
@@ -336,7 +336,7 @@ public class R66ClientGui {
         gbc_buttonFileFind.gridx = 4;
         gbc_buttonFileFind.gridy = 3;
         frmRClientGui.getContentPane().add(buttonFileFind, gbc_buttonFileFind);
-        
+
         buttonTransferStart = new JButton(Messages.getString("R66ClientGui.18")); //$NON-NLS-1$
         buttonTransferStart.setToolTipText(Messages.getString("R66ClientGui.19")); //$NON-NLS-1$
         buttonTransferStart.addActionListener(new ActionListener() {
@@ -350,7 +350,7 @@ public class R66ClientGui {
         gbc_buttonTransferStart.gridx = 3;
         gbc_buttonTransferStart.gridy = 4;
         frmRClientGui.getContentPane().add(buttonTransferStart, gbc_buttonTransferStart);
-        
+
         checkBoxDebug = new JCheckBox(Messages.getString("R66ClientGui.20")); //$NON-NLS-1$
         checkBoxDebug.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -363,7 +363,7 @@ public class R66ClientGui {
         gbc_checkBoxDebug.gridy = 5;
         environnement.debug(checkBoxDebug.isSelected());
         frmRClientGui.getContentPane().add(checkBoxDebug, gbc_checkBoxDebug);
-        
+
         progressBarTransfer = new JProgressBar();
         GridBagConstraints gbc_progressBarTransfer = new GridBagConstraints();
         gbc_progressBarTransfer.weightx = 1.0;
@@ -374,7 +374,7 @@ public class R66ClientGui {
         gbc_progressBarTransfer.gridy = 5;
         frmRClientGui.getContentPane().add(progressBarTransfer, gbc_progressBarTransfer);
         progressBarTransfer.setVisible(false);
-        
+
         scrollPane_1 = new JScrollPane();
         scrollPane_1.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
@@ -386,7 +386,7 @@ public class R66ClientGui {
         gbc_scrollPane_1.gridx = 0;
         gbc_scrollPane_1.gridy = 6;
         frmRClientGui.getContentPane().add(scrollPane_1, gbc_scrollPane_1);
-        
+
         textFieldStatus = new JEditorPane();
         textFieldStatus.setToolTipText(Messages.getString("R66ClientGui.21")); //$NON-NLS-1$
         scrollPane_1.setViewportView(textFieldStatus);
@@ -394,7 +394,7 @@ public class R66ClientGui {
         textFieldStatus.setBackground(new Color(255, 255, 153));
         textFieldStatus.setContentType("text/html");
         textFieldStatus.setEditable(false);
-        
+
         scrollPane = new JScrollPane();
         scrollPane.setViewportBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
         GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -405,28 +405,32 @@ public class R66ClientGui {
         gbc_scrollPane.gridx = 0;
         gbc_scrollPane.gridy = 7;
         frmRClientGui.getContentPane().add(scrollPane, gbc_scrollPane);
-        
+
         textPaneLog = new JTextArea();
         scrollPane.setViewportView(textPaneLog);
         textPaneLog.setToolTipText(Messages.getString("R66ClientGui.23")); //$NON-NLS-1$
         textPaneLog.setEditable(false);
-        
+
         System.setOut(new PrintStream(new JTextAreaOutputStream(textPaneLog)));
-        frmRClientGui.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{buttonCheckConnection, comboBoxHosts, comboBoxRules, checkBoxMD5, textFieldInformation, textFieldFile, buttonFileFind, buttonTransferStart}));
+        frmRClientGui.getContentPane().setFocusTraversalPolicy(
+                new FocusTraversalOnArray(new Component[] { buttonCheckConnection, comboBoxHosts, comboBoxRules,
+                        checkBoxMD5, textFieldInformation, textFieldFile, buttonFileFind, buttonTransferStart }));
     }
 
     /**
      * @author Frederic Bregier
      *
      */
-    public class R66ClientGuiActions extends SwingWorker<String, Integer>{
+    public class R66ClientGuiActions extends SwingWorker<String, Integer> {
         static final int CHECKCONNECTION = 1;
         static final int STARTTRANSFER = 2;
         static final int FILESELECT = 3;
         int method;
+
         R66ClientGuiActions(int method) {
             this.method = method;
         }
+
         /* (non-Javadoc)
          * @see javax.swing.SwingWorker#doInBackground()
          */
@@ -457,7 +461,7 @@ public class R66ClientGui {
             return environnement.GuiResultat;
         }
     }
-    
+
     private void showDialog() {
         disableAllButtons();
         if (dialog != null) {
@@ -477,15 +481,18 @@ public class R66ClientGui {
         dialog.setVisible(true);
         dialog.requestFocus();
     }
+
     private void setStatus(String mesg) {
         textFieldStatus.setText(mesg);
     }
+
     private void startRequest() {
         progressBarTransfer.setIndeterminate(true);
         progressBarTransfer.setValue(0);
         progressBarTransfer.setVisible(true);
         textPaneLog.setText("");
     }
+
     private void stopRequest() {
         progressBarTransfer.setIndeterminate(true);
         progressBarTransfer.setValue(0);
@@ -493,6 +500,7 @@ public class R66ClientGui {
         frmRClientGui.toFront();
         frmRClientGui.requestFocus();
     }
+
     private void checkConnection() {
         startRequest();
         disableAllButtons();
@@ -508,15 +516,16 @@ public class R66ClientGui {
         showDialog();
         stopRequest();
     }
+
     private void startTransfer() {
-    	logger.debug("start startTransfer");
+        logger.debug("start startTransfer");
         disableAllButtons();
         environnement.hostId = (String) comboBoxHosts.getSelectedItem();
         environnement.ruleId = (String) comboBoxRules.getSelectedItem();
         environnement.filePath = textFieldFile.getText();
         environnement.information = textFieldInformation.getText();
         environnement.isMD5 = checkBoxMD5.isSelected();
-        
+
         boolean ok = true;
         if (environnement.hostId == null || environnement.hostId.trim().isEmpty()) {
             environnement.hostId = Messages.getString("R66ClientGui.26"); //$NON-NLS-1$
@@ -542,16 +551,17 @@ public class R66ClientGui {
             environnement.ruleId = environnement.ruleId.trim();
         }
         if (ok) {
-        	logger.debug("start startTransfer: "+environnement.toString());
+            logger.debug("start startTransfer: " + environnement.toString());
             environnement.startsTransfer(progressBarTransfer, textFieldStatus);
         } else {
-            environnement.GuiResultat = Messages.getString("R66ClientGui.34")+ //$NON-NLS-1$
-                Messages.getString("R66ClientGui.35")+environnement.hostId+Messages.getString("R66ClientGui.36")+environnement.ruleId+ //$NON-NLS-1$ //$NON-NLS-2$
-                Messages.getString("R66ClientGui.37")+environnement.filePath; //$NON-NLS-1$
+            environnement.GuiResultat = Messages.getString("R66ClientGui.34") + //$NON-NLS-1$
+                    Messages.getString("R66ClientGui.35") + environnement.hostId + Messages.getString("R66ClientGui.36") + environnement.ruleId + //$NON-NLS-1$ //$NON-NLS-2$
+                    Messages.getString("R66ClientGui.37") + environnement.filePath; //$NON-NLS-1$
         }
         setStatus(environnement.GuiResultat);
         showDialog();
     }
+
     private void findFile() {
         startRequest();
         disableAllButtons();
@@ -561,9 +571,9 @@ public class R66ClientGui {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 try {
-					textFieldFile.setText(file.getCanonicalPath());
-				} catch (IOException e) {
-				}
+                    textFieldFile.setText(file.getCanonicalPath());
+                } catch (IOException e) {
+                }
                 setFindFile();
                 environnement.GuiResultat = Messages.getString("R66ClientGui.38"); //$NON-NLS-1$
             }
@@ -572,6 +582,7 @@ public class R66ClientGui {
             stopRequest();
         }
     }
+
     private void setFindFile() {
         String text = null;
         try {
@@ -580,15 +591,16 @@ public class R66ClientGui {
             text = null;
         }
         if (text != null) {
-    		File file = new File(text);
-    		if (file.exists()) {
-				text = file.toURI().toString();
-    		} else {
-    			//text = "unknown file";
-    		}
+            File file = new File(text);
+            if (file.exists()) {
+                text = file.toURI().toString();
+            } else {
+                //text = "unknown file";
+            }
             textFieldFile.setText(text);
         }
     }
+
     public void disableAllButtons() {
         //frmRClientGui.setEnabled(false);
         buttonCheckConnection.setEnabled(false);
@@ -602,6 +614,7 @@ public class R66ClientGui {
         checkBoxMD5.setEnabled(false);
         checkBoxDebug.setEnabled(false);
     }
+
     public void enableAllButtons() {
         //frmRClientGui.setEnabled(true);
         buttonCheckConnection.setEnabled(true);
@@ -616,23 +629,23 @@ public class R66ClientGui {
         checkBoxDebug.setEnabled(true);
         frmRClientGui.toFront();
     }
-    
+
     public static class JTextAreaOutputStream extends OutputStream {
         JTextArea ta;
 
         public JTextAreaOutputStream(JTextArea t) {
-          super();
-          ta = t;
+            super();
+            ta = t;
         }
 
         public void write(int i) {
-          ta.append(Character.toString((char)i));
+            ta.append(Character.toString((char) i));
         }
 
         public void write(char[] buf, int off, int len) {
-          String s = new String(buf, off, len);
-          ta.append(s);
+            String s = new String(buf, off, len);
+            ta.append(s);
         }
 
-      }
+    }
 }
