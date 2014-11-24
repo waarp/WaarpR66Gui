@@ -203,7 +203,6 @@
 	          <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
 	          <additionalparam>
 	            -link http://java.sun.com/javase/6/docs/api/
-	            -link http://static.netty.io/3.5/api/
 
 				-group "Waarp R66 Client Gui package" "org.waarp.openr66.r66gui*"
 
