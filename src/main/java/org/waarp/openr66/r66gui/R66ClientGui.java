@@ -77,7 +77,7 @@ public class R66ClientGui {
      */
     private static WaarpLogger logger = null;
 
-    public static String[] static_args;
+    static String[] static_args;
     public static R66ClientGui window;
 
     public JFrame frmRClientGui;
@@ -166,7 +166,7 @@ public class R66ClientGui {
                 }
             }
         });
-        frmRClientGui.setTitle("R66 Client Gui: " + Configuration.configuration.HOST_ID);
+        frmRClientGui.setTitle("R66 Client Gui: " + Configuration.configuration.getHOST_ID());
         frmRClientGui.setBounds(100, 100, 724, 546);
         if (extended) {
             frmRClientGui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -431,9 +431,6 @@ public class R66ClientGui {
             this.method = method;
         }
 
-        /* (non-Javadoc)
-         * @see javax.swing.SwingWorker#doInBackground()
-         */
         @Override
         protected String doInBackground() throws Exception {
             disableAllButtons();
