@@ -86,7 +86,7 @@ public class R66Environment {
                 .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
             logger
                     .error(Messages.getString("Configuration.WrongInit")); //$NON-NLS-1$
-            if (DbConstant.admin != null && DbConstant.admin.isActive) {
+            if (DbConstant.admin != null && DbConstant.admin.isActive()) {
                 DbConstant.admin.close();
             }
             ChannelUtils.stopLogger();
@@ -122,7 +122,7 @@ public class R66Environment {
         result.awaitUninterruptibly(30000);
         if (result.isSuccess()) {
             R66Result r66result = result.getResult();
-            ValidPacket info = (ValidPacket) r66result.other;
+            ValidPacket info = (ValidPacket) r66result.getOther();
             GuiResultat = Messages.getString("R66Environment.2") + //$NON-NLS-1$
                     info.getSheader();
         } else {
@@ -137,7 +137,7 @@ public class R66Environment {
         long time1 = System.currentTimeMillis();
         R66Future future = new R66Future(true);
         ProgressDirectTransfer transaction = new ProgressDirectTransfer(future, hostId,
-                filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE,
+                filePath, ruleId, information, isMD5, Configuration.configuration.getBLOCKSIZE(),
                 DbConstant.ILLEGALVALUE, networkTransaction, 500,
                 progressBar, textFieldStatus);
         logger.info("Launch transfer: " + hostId + ":" + ruleId + ":" + filePath);
@@ -150,39 +150,39 @@ public class R66Environment {
         long delay = time2 - time1;
         R66Result result = future.getResult();
         if (future.isSuccess()) {
-            if (result.runner.getErrorInfo() == ErrorCode.Warning) {
+            if (result.getRunner().getErrorInfo() == ErrorCode.Warning) {
                 GuiResultat = Messages.getString("R66Environment.8") + //$NON-NLS-1$
-                        result.runner.toShortNoHtmlString("<br>")
+                        result.getRunner().toShortNoHtmlString("<br>")
                         +
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId
                         +
-                        (result.file != null ? result.file.toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                        (result.getFile() != null ? result.getFile().toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                         delay;
             } else {
                 GuiResultat = Messages.getString("R66Environment.14") + //$NON-NLS-1$
-                        result.runner.toShortNoHtmlString("<br>")
+                        result.getRunner().toShortNoHtmlString("<br>")
                         +
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId
                         +
-                        (result.file != null ? result.file.toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
+                        (result.getFile() != null ? result.getFile().toString() + "" : Messages.getString("R66ClientGui.30")) + Messages.getString("R66Environment.13") + //$NON-NLS-2$ //$NON-NLS-3$
                         delay;
             }
         } else {
-            if (result == null || result.runner == null) {
+            if (result == null || result.getRunner() == null) {
                 GuiResultat = Messages.getString("R66Environment.20") + //$NON-NLS-1$
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId + "     " + future
                                 .getCause().getMessage();
-            } else if (result.runner.getErrorInfo() == ErrorCode.Warning) {
+            } else if (result.getRunner().getErrorInfo() == ErrorCode.Warning) {
                 GuiResultat = Messages.getString("R66Environment.23") + //$NON-NLS-1$
-                        result.runner.toShortNoHtmlString("<br>") +
+                        result.getRunner().toShortNoHtmlString("<br>") +
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId + "    " + future.getCause().getMessage();
             } else {
                 GuiResultat = Messages.getString("R66Environment.27") + //$NON-NLS-1$
-                        result.runner.toShortNoHtmlString("<br>") +
+                        result.getRunner().toShortNoHtmlString("<br>") +
                         Messages.getString("R66Environment.10") + //$NON-NLS-1$
                         hostId + "    " + future.getCause().getMessage();
             }
@@ -193,7 +193,7 @@ public class R66Environment {
     public static String[] getHostIds() {
         String[] results = null;
         DbHostAuth[] dbHostAuths;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
             dbHostAuths = DbHostAuth.getAllHosts(session);
         } catch (WaarpDatabaseNoConnectionException e) {
@@ -220,7 +220,7 @@ public class R66Environment {
     public static String[] getRules() {
         String[] results = null;
         DbRule[] dbRules;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
             dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
@@ -239,7 +239,7 @@ public class R66Environment {
         }
         results = new String[dbRules.length];
         for (int i = 0; i < dbRules.length; i++) {
-            results[i] = dbRules[i].idRule;
+            results[i] = dbRules[i].getIdRule();
         }
         return results;
     }
@@ -247,7 +247,7 @@ public class R66Environment {
     public static String[] getRules(boolean sendMode) {
         String[] results = null;
         DbRule[] dbRules;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
             dbRules = DbRule.getAllRules(session);
         } catch (WaarpDatabaseNoConnectionException e) {
@@ -279,12 +279,12 @@ public class R66Environment {
         for (DbRule rule : dbRules) {
             if (sendMode) {
                 if (rule.isSendMode()) {
-                    results[i] = rule.idRule;
+                    results[i] = rule.getIdRule();
                     i++;
                 }
             } else {
                 if (rule.isRecvMode()) {
-                    results[i] = rule.idRule;
+                    results[i] = rule.getIdRule();
                     i++;
                 }
             }
@@ -294,7 +294,7 @@ public class R66Environment {
 
     public static String getHost(String id) {
         DbHostAuth host = null;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
             host = new DbHostAuth(session, id);
         } catch (WaarpDatabaseException e) {
@@ -330,7 +330,7 @@ public class R66Environment {
 
     public static String getRule(String id) {
         DbRule rule = null;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.session : null;
+        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
             rule = new DbRule(session, id);
         } catch (WaarpDatabaseException e) {

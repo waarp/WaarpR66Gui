@@ -65,9 +65,6 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
         this.textFieldStatus.setText("Initializing transfer...");
     }
 
-    /* (non-Javadoc)
-     * @see org.waarp.openr66.client.ProgressBarTransfer#callBack(int, int)
-     */
     @Override
     public void callBack(int currentBlock, int blocksize) {
         if (firstCall) {
@@ -93,9 +90,6 @@ public class ProgressDirectTransfer extends ProgressBarTransfer {
         lastRank = currentBlock;
     }
 
-    /* (non-Javadoc)
-     * @see org.waarp.openr66.client.ProgressBarTransfer#lastCallBack(boolean, int, int)
-     */
     @Override
     public void lastCallBack(boolean success, int currentBlock, int blocksize) {
         this.progressBar.setIndeterminate(false);

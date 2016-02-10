@@ -37,14 +37,14 @@ import javax.swing.border.EmptyBorder;
  * @author Frederic Bregier
  *
  */
-public class R66Dialog extends JDialog {
+class R66Dialog extends JDialog {
 
     /**
      * 
      */
     private static final long serialVersionUID = -6105635300084413738L;
     private final JPanel contentPanel = new JPanel();
-    public JEditorPane textPaneDialog;
+    JEditorPane textPaneDialog;
 
     /**
      * Create the dialog.
