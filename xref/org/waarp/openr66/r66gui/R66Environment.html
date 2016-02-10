@@ -94,7 +94,7 @@
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>                  .setClientConfigurationFromXml(Configuration.configuration, args[0])) {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>              logger
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>                      .error(Messages.getString(<span class="jxr_string">"Configuration.WrongInit"</span>)); <em class="jxr_comment">//$NON-NLS-1$</em>
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>              <strong class="jxr_keyword">if</strong> (DbConstant.admin != <strong class="jxr_keyword">null</strong> &amp;&amp; DbConstant.admin.isActive) {
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>              <strong class="jxr_keyword">if</strong> (DbConstant.admin != <strong class="jxr_keyword">null</strong> &amp;&amp; DbConstant.admin.isActive()) {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>                  DbConstant.admin.close();
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>              }
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>              ChannelUtils.stopLogger();
@@ -130,7 +130,7 @@
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>         result.awaitUninterruptibly(30000);
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>         <strong class="jxr_keyword">if</strong> (result.isSuccess()) {
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>             R66Result r66result = result.getResult();
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>             ValidPacket info = (ValidPacket) r66result.other;
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>             ValidPacket info = (ValidPacket) r66result.getOther();
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>             GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.2"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>                     info.getSheader();
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         } <strong class="jxr_keyword">else</strong> {
@@ -145,7 +145,7 @@
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         <strong class="jxr_keyword">long</strong> time1 = System.currentTimeMillis();
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>         R66Future future = <strong class="jxr_keyword">new</strong> R66Future(<strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>         <a href="../../../../org/waarp/openr66/r66gui/ProgressDirectTransfer.html">ProgressDirectTransfer</a> transaction = <strong class="jxr_keyword">new</strong> <a href="../../../../org/waarp/openr66/r66gui/ProgressDirectTransfer.html">ProgressDirectTransfer</a>(future, hostId,
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>                 filePath, ruleId, information, isMD5, Configuration.configuration.BLOCKSIZE,
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>                 filePath, ruleId, information, isMD5, Configuration.configuration.getBLOCKSIZE(),
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>                 DbConstant.ILLEGALVALUE, networkTransaction, 500,
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>                 progressBar, textFieldStatus);
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>         logger.info(<span class="jxr_string">"Launch transfer: "</span> + hostId + <span class="jxr_string">":"</span> + ruleId + <span class="jxr_string">":"</span> + filePath);
@@ -158,39 +158,39 @@
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>         <strong class="jxr_keyword">long</strong> delay = time2 - time1;
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>         R66Result result = future.getResult();
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>         <strong class="jxr_keyword">if</strong> (future.isSuccess()) {
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>             <strong class="jxr_keyword">if</strong> (result.runner.getErrorInfo() == ErrorCode.Warning) {
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>             <strong class="jxr_keyword">if</strong> (result.getRunner().getErrorInfo() == ErrorCode.Warning) {
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>                 GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.8"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>                         result.runner.toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>)
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>                         result.getRunner().toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>)
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>                         +
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>                         Messages.getString(<span class="jxr_string">"R66Environment.10"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>                         hostId
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>                         +
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>                         (result.file != <strong class="jxr_keyword">null</strong> ? result.file.toString() + <span class="jxr_string">""</span> : Messages.getString(<span class="jxr_string">"R66ClientGui.30"</span>)) + Messages.getString(<span class="jxr_string">"R66Environment.13"</span>) + <em class="jxr_comment">//$NON-NLS-2$ //$NON-NLS-3$</em>
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>                         (result.getFile() != <strong class="jxr_keyword">null</strong> ? result.getFile().toString() + <span class="jxr_string">""</span> : Messages.getString(<span class="jxr_string">"R66ClientGui.30"</span>)) + Messages.getString(<span class="jxr_string">"R66Environment.13"</span>) + <em class="jxr_comment">//$NON-NLS-2$ //$NON-NLS-3$</em>
 <a class="jxr_linenumber" name="L161" href="#L161">161</a>                         delay;
 <a class="jxr_linenumber" name="L162" href="#L162">162</a>             } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>                 GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.14"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>                         result.runner.toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>)
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>                         result.getRunner().toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>)
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>                         +
 <a class="jxr_linenumber" name="L166" href="#L166">166</a>                         Messages.getString(<span class="jxr_string">"R66Environment.10"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>                         hostId
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>                         +
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>                         (result.file != <strong class="jxr_keyword">null</strong> ? result.file.toString() + <span class="jxr_string">""</span> : Messages.getString(<span class="jxr_string">"R66ClientGui.30"</span>)) + Messages.getString(<span class="jxr_string">"R66Environment.13"</span>) + <em class="jxr_comment">//$NON-NLS-2$ //$NON-NLS-3$</em>
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>                         (result.getFile() != <strong class="jxr_keyword">null</strong> ? result.getFile().toString() + <span class="jxr_string">""</span> : Messages.getString(<span class="jxr_string">"R66ClientGui.30"</span>)) + Messages.getString(<span class="jxr_string">"R66Environment.13"</span>) + <em class="jxr_comment">//$NON-NLS-2$ //$NON-NLS-3$</em>
 <a class="jxr_linenumber" name="L170" href="#L170">170</a>                         delay;
 <a class="jxr_linenumber" name="L171" href="#L171">171</a>             }
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>             <strong class="jxr_keyword">if</strong> (result == <strong class="jxr_keyword">null</strong> || result.runner == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>             <strong class="jxr_keyword">if</strong> (result == <strong class="jxr_keyword">null</strong> || result.getRunner() == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L174" href="#L174">174</a>                 GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.20"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>                         Messages.getString(<span class="jxr_string">"R66Environment.10"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>                         hostId + <span class="jxr_string">"     "</span> + future
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>                                 .getCause().getMessage();
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (result.runner.getErrorInfo() == ErrorCode.Warning) {
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (result.getRunner().getErrorInfo() == ErrorCode.Warning) {
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>                 GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.23"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>                         result.runner.toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>) +
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>                         result.getRunner().toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>) +
 <a class="jxr_linenumber" name="L181" href="#L181">181</a>                         Messages.getString(<span class="jxr_string">"R66Environment.10"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>                         hostId + <span class="jxr_string">"    "</span> + future.getCause().getMessage();
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>             } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L184" href="#L184">184</a>                 GuiResultat = Messages.getString(<span class="jxr_string">"R66Environment.27"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>                         result.runner.toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>) +
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>                         result.getRunner().toShortNoHtmlString(<span class="jxr_string">"&lt;br&gt;"</span>) +
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>                         Messages.getString(<span class="jxr_string">"R66Environment.10"</span>) + <em class="jxr_comment">//$NON-NLS-1$</em>
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>                         hostId + <span class="jxr_string">"    "</span> + future.getCause().getMessage();
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>             }
@@ -201,7 +201,7 @@
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> String[] getHostIds() {
 <a class="jxr_linenumber" name="L194" href="#L194">194</a>         String[] results = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L195" href="#L195">195</a>         DbHostAuth[] dbHostAuths;
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.session : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L196" href="#L196">196</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.getSession() : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L197" href="#L197">197</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L198" href="#L198">198</a>             dbHostAuths = DbHostAuth.getAllHosts(session);
 <a class="jxr_linenumber" name="L199" href="#L199">199</a>         } <strong class="jxr_keyword">catch</strong> (WaarpDatabaseNoConnectionException e) {
@@ -228,7 +228,7 @@
 <a class="jxr_linenumber" name="L220" href="#L220">220</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> String[] getRules() {
 <a class="jxr_linenumber" name="L221" href="#L221">221</a>         String[] results = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L222" href="#L222">222</a>         DbRule[] dbRules;
-<a class="jxr_linenumber" name="L223" href="#L223">223</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.session : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L223" href="#L223">223</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.getSession() : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L224" href="#L224">224</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L225" href="#L225">225</a>             dbRules = DbRule.getAllRules(session);
 <a class="jxr_linenumber" name="L226" href="#L226">226</a>         } <strong class="jxr_keyword">catch</strong> (WaarpDatabaseNoConnectionException e) {
@@ -247,7 +247,7 @@
 <a class="jxr_linenumber" name="L239" href="#L239">239</a>         }
 <a class="jxr_linenumber" name="L240" href="#L240">240</a>         results = <strong class="jxr_keyword">new</strong> String[dbRules.length];
 <a class="jxr_linenumber" name="L241" href="#L241">241</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; dbRules.length; i++) {
-<a class="jxr_linenumber" name="L242" href="#L242">242</a>             results[i] = dbRules[i].idRule;
+<a class="jxr_linenumber" name="L242" href="#L242">242</a>             results[i] = dbRules[i].getIdRule();
 <a class="jxr_linenumber" name="L243" href="#L243">243</a>         }
 <a class="jxr_linenumber" name="L244" href="#L244">244</a>         <strong class="jxr_keyword">return</strong> results;
 <a class="jxr_linenumber" name="L245" href="#L245">245</a>     }
@@ -255,7 +255,7 @@
 <a class="jxr_linenumber" name="L247" href="#L247">247</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> String[] getRules(<strong class="jxr_keyword">boolean</strong> sendMode) {
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>         String[] results = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L249" href="#L249">249</a>         DbRule[] dbRules;
-<a class="jxr_linenumber" name="L250" href="#L250">250</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.session : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L250" href="#L250">250</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.getSession() : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L251" href="#L251">251</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L252" href="#L252">252</a>             dbRules = DbRule.getAllRules(session);
 <a class="jxr_linenumber" name="L253" href="#L253">253</a>         } <strong class="jxr_keyword">catch</strong> (WaarpDatabaseNoConnectionException e) {
@@ -287,12 +287,12 @@
 <a class="jxr_linenumber" name="L279" href="#L279">279</a>         <strong class="jxr_keyword">for</strong> (DbRule rule : dbRules) {
 <a class="jxr_linenumber" name="L280" href="#L280">280</a>             <strong class="jxr_keyword">if</strong> (sendMode) {
 <a class="jxr_linenumber" name="L281" href="#L281">281</a>                 <strong class="jxr_keyword">if</strong> (rule.isSendMode()) {
-<a class="jxr_linenumber" name="L282" href="#L282">282</a>                     results[i] = rule.idRule;
+<a class="jxr_linenumber" name="L282" href="#L282">282</a>                     results[i] = rule.getIdRule();
 <a class="jxr_linenumber" name="L283" href="#L283">283</a>                     i++;
 <a class="jxr_linenumber" name="L284" href="#L284">284</a>                 }
 <a class="jxr_linenumber" name="L285" href="#L285">285</a>             } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L286" href="#L286">286</a>                 <strong class="jxr_keyword">if</strong> (rule.isRecvMode()) {
-<a class="jxr_linenumber" name="L287" href="#L287">287</a>                     results[i] = rule.idRule;
+<a class="jxr_linenumber" name="L287" href="#L287">287</a>                     results[i] = rule.getIdRule();
 <a class="jxr_linenumber" name="L288" href="#L288">288</a>                     i++;
 <a class="jxr_linenumber" name="L289" href="#L289">289</a>                 }
 <a class="jxr_linenumber" name="L290" href="#L290">290</a>             }
@@ -302,7 +302,7 @@
 <a class="jxr_linenumber" name="L294" href="#L294">294</a> 
 <a class="jxr_linenumber" name="L295" href="#L295">295</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> String getHost(String id) {
 <a class="jxr_linenumber" name="L296" href="#L296">296</a>         DbHostAuth host = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L297" href="#L297">297</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.session : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L297" href="#L297">297</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.getSession() : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L298" href="#L298">298</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L299" href="#L299">299</a>             host = <strong class="jxr_keyword">new</strong> DbHostAuth(session, id);
 <a class="jxr_linenumber" name="L300" href="#L300">300</a>         } <strong class="jxr_keyword">catch</strong> (WaarpDatabaseException e) {
@@ -338,7 +338,7 @@
 <a class="jxr_linenumber" name="L330" href="#L330">330</a> 
 <a class="jxr_linenumber" name="L331" href="#L331">331</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> String getRule(String id) {
 <a class="jxr_linenumber" name="L332" href="#L332">332</a>         DbRule rule = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L333" href="#L333">333</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.session : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L333" href="#L333">333</a>         DbSession session = DbConstant.admin != <strong class="jxr_keyword">null</strong> ? DbConstant.admin.getSession() : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L334" href="#L334">334</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L335" href="#L335">335</a>             rule = <strong class="jxr_keyword">new</strong> DbRule(session, id);
 <a class="jxr_linenumber" name="L336" href="#L336">336</a>         } <strong class="jxr_keyword">catch</strong> (WaarpDatabaseException e) {
@@ -403,6 +403,6 @@
 <a class="jxr_linenumber" name="L395" href="#L395">395</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2009&#x2013;2014 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2009&#x2013;2016 <a href="http://www.waarp.it">Waarp</a>. All rights reserved.</div>
 </body>
 </html>
