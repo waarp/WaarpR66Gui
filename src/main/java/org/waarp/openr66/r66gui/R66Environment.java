@@ -5,8 +5,8 @@
    tags. See the COPYRIGHT.txt in the distribution for a full listing of
    individual contributors.
 
-   All Waarp Project is free software: you can redistribute it and/or 
-   modify it under the terms of the GNU General Public License as published 
+   All Waarp Project is free software: you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as published
    by the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
@@ -193,14 +193,9 @@ public class R66Environment {
     public static String[] getHostIds() {
         String[] results = null;
         DbHostAuth[] dbHostAuths;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
-            dbHostAuths = DbHostAuth.getAllHosts(session);
+            dbHostAuths = DbHostAuth.getAllHosts();
         } catch (WaarpDatabaseNoConnectionException e) {
-            results = new String[1];
-            results[0] = Messages.getString("R66Environment.31"); //$NON-NLS-1$
-            return results;
-        } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
             results[0] = Messages.getString("R66Environment.31"); //$NON-NLS-1$
             return results;
@@ -220,14 +215,9 @@ public class R66Environment {
     public static String[] getRules() {
         String[] results = null;
         DbRule[] dbRules;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
-            dbRules = DbRule.getAllRules(session);
+            dbRules = DbRule.getAllRules();
         } catch (WaarpDatabaseNoConnectionException e) {
-            results = new String[1];
-            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
-            return results;
-        } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
             results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
@@ -247,14 +237,9 @@ public class R66Environment {
     public static String[] getRules(boolean sendMode) {
         String[] results = null;
         DbRule[] dbRules;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
-            dbRules = DbRule.getAllRules(session);
+            dbRules = DbRule.getAllRules();
         } catch (WaarpDatabaseNoConnectionException e) {
-            results = new String[1];
-            results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
-            return results;
-        } catch (WaarpDatabaseSqlException e) {
             results = new String[1];
             results[0] = Messages.getString("R66Environment.34"); //$NON-NLS-1$
             return results;
@@ -294,9 +279,8 @@ public class R66Environment {
 
     public static String getHost(String id) {
         DbHostAuth host = null;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
-            host = new DbHostAuth(session, id);
+            host = new DbHostAuth(id);
         } catch (WaarpDatabaseException e) {
         }
         if (host != null) {
@@ -330,9 +314,8 @@ public class R66Environment {
 
     public static String getRule(String id) {
         DbRule rule = null;
-        DbSession session = DbConstant.admin != null ? DbConstant.admin.getSession() : null;
         try {
-            rule = new DbRule(session, id);
+            rule = new DbRule(id);
         } catch (WaarpDatabaseException e) {
         }
         if (rule != null) {
